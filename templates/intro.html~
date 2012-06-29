@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+</br>
+</br>
+</br>
+
+<div align="center">
+
+<img src="/static/imgs/logo.jpg" alt="logo" width="406" height="225" />
+<div class="txtSearchArea">
+	<form action="/timeline" style="float:left; position:absolute; width:550px;margin:0 auto;" method="post" align="center" name="keywords">
+	{% raw xsrf_form_html() %}
+		<div style= "margin-left:16px; margin-top:14px;  float:left;" align="center" >
+		   <input id="txtSearch" name="txtSearch" class="txtSearch" type="text" size="27" style="font-size:16pt;border: 0px; color: #596970;" 	value="Input your tag here" onclick="this.value=''"; style="float:left;" /> 
+		</div>
+
+		<input type="image" id="btnButton" style="float:right;" src="/static/imgs/button.jpg" value="submit"
+border="0" alt="searchbar" onmouseover="this.src='/static/imgs/buttonOver.jpg'" onmouseout="this.src='/static/imgs/button.jpg'"//>
+	
+
+
+	</form>
+	<div class="btnStyle">
+
+	</div>
+
+
+	<div style="font-size:13pt;font-family:'Verdana';margin-left:0px; color:white;"> Clear, simple knowledge.
+	</div>
+</div>
+</div>
+
+</br>
+
+</br>
+</br>
+</br>
+</br>
+</br>
+{% end%}
+

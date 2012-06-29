@@ -1,0 +1,495 @@
+
+{% block content %}
+<link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+<style src="text/css">
+.popup-blurb {
+background-repeat:no-repeat; background-image:url('/static/imgs/popup.jpg');
+border: 0 px;
+padding: 15px;
+width:940px;
+height:600px;
+overflow:auto;
+}
+</style>
+<style>
+body { background-repeat:repeat-x; background-image:url('/static/imgs/back.jpg');}
+svg {
+font: 10px sans-serif;
+width: 80%;
+height:575px;
+position:absolute;
+left: 10%;
+margin: 0 auto;
+background-color:white;
+}
+path {
+  fill: none;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+.meta-column {
+    font-family: "Arvo",serif;
+	float: right;
+	margin-right: 1px;
+	width: 220px;
+    height: 1000px;
+}
+
+.timeline-column {
+	float:left;
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: black;
+}
+
+.title {
+	display: block;
+	color: white;
+	background-color: rgb(82, 84, 90);
+	font-weight: bold;
+}
+
+</style>
+
+<body>
+
+<div id="left-col" class="timeline-column"></div>
+<div id="meta-box" class="meta-column"></div>
+</body>
+{% end %}
+
+{% block scripts %}
+
+
+
+<script src="{{static_url('js/libs/jquery-1.7.2.min.js')}}"></script>
+<script src="{{static_url('js/libs/jquery.tmpl.min.js')}}"></script>
+<script src="{{static_url('js/libs/blurb.min.js')}}"></script>
+<script src="{{static_url('js/libs/d3/d3.v2.js')}}"></script>
+<script>
+var formatDate = d3.time.format('%Y-%m-%d %H:%M:%S');
+var items = {% raw kwargs["feed"] %}
+
+var meta = items.meta
+var series = []
+
+for (var i=0; i<items.dates.length; i++){
+	series[i] = []
+	for (var j=0; j<items.dates[i].length; j++){
+		series[i][j] = {date: formatDate.parse(items.dates[i][j]), price:items.counts[i][j]}
+	}
+}
+
+var color = d3.scale.category20c();
+
+var margin = {top: 10, right: 10, bottom: 100, left: 40},
+    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+    width = 1600 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
+    height2 = 500 - margin2.top - margin2.bottom;
+
+var x = d3.time.scale().range([0, width]),
+    x2 = d3.time.scale().range([0, width]),
+    y = d3.scale.linear().range([height, 0]),
+    y2 = d3.scale.linear().range([height2, 0]);
+
+var xAxis = d3.svg.axis().scale(x).orient("bottom"),
+    xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
+    yAxis = d3.svg.axis().scale(y).orient("left");
+
+var brush = d3.svg.brush()
+    .x(x2)
+    .on("brush", brush);
+
+var area = d3.svg.line()
+			 .x(function(d) { return x(d.date); })
+			 .y(function(d) { return y(d.price); })
+			 .interpolate("monotone");
+			 
+var area2 = d3.svg.line()
+    .x(function(d) { return x2(d.date); })
+    .y(function(d) { return y2(d.price); })
+    .interpolate("monotone");
+    
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    
+timelineCol = d3.select("#left-col")
+timelineCol.append("svg").attr("d", svg);
+
+svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+var focus = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    
+var context = svg.append("g")
+    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")"); 
+
+//Find extent of x domain and the max value of y domain. Iterate over all extents and find the largest extent
+//x domain must be scaled according to the largest extent
+var maxx = d3.max(series[0].map(function(d) { return d.date; }));
+var minx = d3.min(series[0].map(function(d) { return d.date; }));
+var maxy = 0;
+for (var i=0; i<series.length; i++){
+	var temp_maxx = d3.max(series[i].map(function(d) { return d.date; }));
+	if (temp_maxx > maxx){
+		maxx = temp_maxx;
+	}
+	var temp_minx = d3.min(series[i].map(function(d) { return d.date; }));
+	if (temp_minx < minx){
+		minx = temp_minx;
+	}
+	var temp_maxy = d3.max(series[i].map(function(d) { return d.price; }));
+	if (temp_maxy > maxy){
+		maxy = temp_maxy;
+	}
+}
+console.log(maxx);
+console.log(minx);
+
+//Sets the x domain to be equal to the width of the extent	
+x.domain([minx, maxx]);
+y.domain([0, maxy]);
+x2.domain(x.domain());
+y2.domain(y.domain());
+
+//Appends the large chart
+focus.selectAll(".line")
+    .data(series)
+    .enter()
+    .append("path")
+    .attr("clip-path", "url(#clip)")
+    .attr("d", area)
+    .attr("stroke", function(d, i) {return color(i)})
+    .attr("stroke-width", 3)
+    .on("click", click);
+
+//Appends the x axis
+focus.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
+		  
+//Appends the small chart
+context.selectAll(".line")
+    .data(series)
+    .enter()
+    .append("path")
+    .attr("d", area2)
+	.attr("stroke", function(d, i) {return color(i)});
+
+//Appends the x axis of the small chart
+context.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height2 + ")")
+    .call(xAxis2);
+
+//Appends the brush of the small chart
+context.append("g")
+    .attr("class", "x brush")
+    .call(brush)
+    .selectAll("rect")
+    .attr("y", -6)
+    .attr("height", height2);
+
+function brush() {
+  x.domain(brush.empty() ? x2.domain() : brush.extent());
+  focus.selectAll("path").attr("d", area);
+  focus.select(".x.axis").call(xAxis);
+}
+
+//-------------------EVENT HANDLERS ---------------//
+
+function click(d, i){
+	if (meta){
+		//Appends events to show coords
+		focus.selectAll("circle") 
+          .data(meta) 
+          .enter() 
+          .append("circle") 
+          .attr("cx", function(d) { return x(formatDate.parse(d.date)); }) 
+          .attr("cy", function(d) {    var date = formatDate.parse(d.date);
+                                       for (var i = 0; i<series[0].length; i++) 
+          								if (date - series[0][i].date == 0) {
+          									return y(series[0][i].price);
+          								}
+           					      }) 
+          .attr("r", 8) 
+          .attr("opacity", 1) 
+          .attr("fill", d3.rgb(0, 0, 0))
+          .on("click", clickDot)
+          .on("mouseover", mouseoverDot)
+          .on("mouseout", mouseoutDot)
+          .append("svg:title").text(function(d) {return "Date: " + d.date + 
+          												"\nTitle: " + d.title + 
+          												"\nLocation: " + d.locations +
+          												"\nUsers: " + d.authors;});
+	}
+}
+
+function mouseoverDot(d, i){
+	var circle = d3.select(this)
+	circle.attr("r", 10);
+	circle.attr("fill", d3.rgb(255, 0, 0))
+}
+
+function mouseoutDot(d, i){
+	var circle = d3.select(this)
+	circle.attr("r", 8);
+	circle.attr("fill", d3.rgb(0, 0, 0))
+}
+
+var popup = new Blurb({
+    cssClass: "popup-blurb",
+    position: "center-center",          
+    displayDuration: -1,
+    wrap: true
+});
+
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+}
+
+
+function clickDot(d, i){
+	//console.log(d.keywords);
+	//console.log(d.topTweets);
+	//console.log(d.namedEntities);
+	//console.log(d.locations);
+
+	if (isEmpty(d.locations)){
+		loca = " ";
+	}
+	else{
+	loca= d.locations[0][0];
+	}
+
+	if (isEmpty(d.namedEntities)){
+		ent = " ";
+	}
+	else{
+	ent = d.namedEntities[0][0];
+	}
+
+	if (typeof(d.keywords[5]) == "undefined")
+	{
+            key5= " ";
+            num5= " ";
+	}
+    	else{
+    	    key5= d.keywords[5][0];
+	    num5= d.keywords[5][1]
+    	}
+
+	if (typeof(d.keywords[6]) == "undefined")
+	{
+            key6= " ";
+            num6= " ";
+	}
+    	else{
+    	    key6= d.keywords[6][0];
+	    num6= d.keywords[6][1]
+    	}
+
+	if (typeof(d.keywords[7]) == "undefined")
+	{
+            key7= " ";
+            num7= " ";
+	}
+    	else{
+    	    key7= d.keywords[7][0];
+	    num7= d.keywords[7][1]
+    	}
+	if (typeof(d.keywords[8]) == "undefined")
+	{
+            key8= " ";
+            num8= " ";
+	}
+    	else{
+    	    key8= d.keywords[8][0];
+	    num8= d.keywords[8][1]
+    	}
+
+
+
+
+	var tmpl = $("#users-actions-edit-template").tmpl({	keyword1: d.keywords[0][0],
+								keyword2: d.keywords[1][0],
+								keyword3: d.keywords[2][0],
+								keyword4: d.keywords[3][0],
+								keyword5: d.keywords[4][0],
+								keyword6: key5,
+								keyword7: key6,
+								keyword8: key7,
+								keyword9: key8,
+								keywordNUM1: d.keywords[0][1],
+								keywordNUM2: d.keywords[1][1],
+								keywordNUM3: d.keywords[2][1],
+								keywordNUM4: d.keywords[3][1],
+								keywordNUM5: d.keywords[4][1],
+								keywordNUM6: num5,
+								keywordNUM7: num6,
+								keywordNUM8: num7,
+								keywordNUM9: num8,
+								summary1: d.topTweets[0],
+								summary2: d.topTweets[1],
+								summary3: d.topTweets[2],
+								summary4: d.topTweets[3],
+								summary5: d.topTweets[4],			 
+								authors:d.authors, 
+
+								namedEntities:ent, 
+								locations:loca});
+	popup.show(tmpl)
+}
+
+$('#close-btn').live("click", function(){popup.close();});
+
+</script>
+
+
+{% end %}
+
+{% block jquery_templates %}
+<script id="users-actions-edit-template" type="text/x-jquery-tmpl">
+
+<style type="text/css">
+.HEADER{position:absolute; font-family:'Arial Rounded MT Bold';font-size:20pt; color:#53666d;}
+.TopTweetsA{font-family:'Arial'; font-size:12pt; color:#1f2021;left:83px;position: absolute;}
+.TopTweetsB{font-family:'Arial'; font-size:12pt; color:#53666d;left:83px;position: absolute;}
+.Details{font-family:'Arial'; font-size:13pt; color:black;left:80px;position: absolute;}
+.Keywords{font-family:'Arial'; font-size:13pt; color:black;left:80px;position: absolute; left:670px; }
+.KeywordsNUM{font-family:'Arial'; font-size:16pt; color:#53666d;left:80px;position: absolute; left:620px;}
+.AuthorLIST {margin-top:12px;}
+</style>
+
+<div class="container clearfix" style=" width:940px;">	
+
+<div>
+<div class="HEADER" style="top:55px; left:90px; color:#d4743f" > Top Tweets</div>
+
+    <div id="TopTweets1" class="TopTweetsA" style="top:101px; OVERFLOW-Y:AUTO; width:420px;">
+    &quot; ${summary1}  &quot;
+    </div>
+
+    <div id="TopTweets2" class="TopTweetsB" style="top:161px;OVERFLOW-Y:AUTO; width:420px;">
+    &quot; ${summary2} &quot;
+    </div>
+
+
+    <div id="TopTweets3" class="TopTweetsA"  style="position: OVERFLOW-Y:AUTO; width:400px; absolute;top:218px; left:80px;">
+    &quot;${summary3}&quot;
+
+    </div>
+
+
+    <div id="TopTweets4"  class="TopTweetsB" style="top:276px;OVERFLOW-Y:AUTO; width:400px;">
+    &quot;${summary4}&quot;
+
+    </div>
+
+    <div id="TopTweets5" class="TopTweetsA" style="top:332px;OVERFLOW-Y:AUTO; width:400px;">
+   &quot;${summary5}&quot;
+
+
+    </div>
+
+
+<div class="HEADER" style="top:48px; left:600px; font-size:19pt;"> Top Keywords</div>
+		
+     <div id="Keyword1"  class="Keywords" style="top:93px;"> ${keyword1}</div>
+     <div id="Keyword1NUM"  class="KeywordsNUM" style="top:90px;"> ${keywordNUM1}</div>
+
+
+     <div id="Keyword2"  class="Keywords" style="top:118px;"> ${keyword2}</div>
+     <div id="Keyword2NUM"  class="KeywordsNUM" style="top:115px; "> ${keywordNUM2}</div>
+
+
+     <div id="Keyword3"  class="Keywords" style="top:143px;"> ${keyword3}</div>
+     <div id="Keyword3NUM"  class="KeywordsNUM" style="top:140px;"> ${keywordNUM3}</div>
+
+
+     <div id="Keyword4"  class="Keywords" style="top:168px; "> ${keyword4}</div>
+     <div id="Keyword4NUM"  class="KeywordsNUM" style="top:165px;"> ${keywordNUM4}</div>
+
+     <div id="Keyword5"  class="Keywords" style="top:193px;"> ${keyword5}</div>
+     <div id="Keyword5NUM"  class="KeywordsNUM" style="top:190px;"> ${keywordNUM5}</div>
+
+     <div id="Keyword6"  class="Keywords" style="top:218px;"> ${keyword6}</div>
+     <div id="Keyword6NUM"  class="KeywordsNUM" style="top:215px;"> ${keywordNUM6}</div>
+
+     <div id="Keyword7"  class="Keywords" style="top:243px;"> ${keyword7}</div>
+     <div id="Keyword7NUM"  class="KeywordsNUM" style="top:240px;"> ${keywordNUM7}</div>
+
+     <div id="Keyword8"  class="Keywords" style="top:268px; "> ${keyword8}</div>
+     <div id="Keyword8NUM"  class="KeywordsNUM" style="top:265px;"> ${keywordNUM8}</div>
+
+
+     <div id="Keyword9"  class="Keywords" style="top:293px;"> ${keyword9}</div>
+     <div id="Keyword9NUM"  class="KeywordsNUM" style="top:290px;"> ${keywordNUM9}</div>
+
+
+
+<div class="HEADER" style="top:348px; left:605px; color:black;"> Users
+<br/>
+
+     <div id="one" style="margin-top:-375px; margin-left:265px;">
+
+
+		<input type="image" id="close-btn" style="float:right; " src="/static/imgs/btnClose2.jpg" value="submit"
+border="0" alt="searchbar" //>
+	
+
+
+
+     </div>
+ 
+
+</div>
+<div class="Details" style="position:absolute; top:360px; left:788px;"> 
+   <div>Activists</div>
+   <div class="AuthorLIST">Journalists</div>
+   <div class="AuthorLIST">Government</div>
+   <div class="AuthorLIST">Students</div>
+   <div class="AuthorLIST">Press/Media</div>
+   <div class="AuthorLIST">Public</div>
+</div>
+
+
+<img src="/static/imgs/circle.png" style="float:left; margin-left:540px; margin-top:350px;">
+<div id="UsersNUM" class="HEADER" style="top:450px; left:618px;font-size:29pt;color:black;">98</div>
+
+
+
+<div  class="HEADER" style="top:420px; font-size:16pt; left:185px; ">  Named Entities</div>
+<div id="NameEntities"  class="Details" style="top:451px; left:185px;">  ${namedEntities}</div>
+
+<div  class="HEADER" style="top:520px; font-size:16pt; left:185px; ">  Location:</div>
+<div id="Location"  class="Details" style="top:524px; left:290px;"> ${locations}</div>
+</div>
+</div>
+</script>
+
+{% end %}

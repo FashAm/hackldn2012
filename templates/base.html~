@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]--> 
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]--> 
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]--> 
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]--> 
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]--> 
+<head xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="author" content="Pythia"> 
+	<meta name="description" content="Online Event platform "> 
+	<meta property="og:image" content="http://www.petrominpng.com.pg/images/logo_big.png" />
+	<meta name="viewport" content="width=920, initial-scale=auto"> 
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Pythia" /> 
+
+	<meta property="og:site_name" content="Pythia" />
+	<title>
+		{% block title %}
+			Pythia.com 
+		{% end %}
+	</title>
+
+<style type="text/css">
+body { background-repeat:repeat-x; background-image:url('/static/imgs/back.jpg');}
+div.txtSearchArea {background-repeat:no-repeat; background-image:url('/static/imgs/searchbar.jpg');width:500px;margin:0 auto;}
+div.btnStyle {margin-left:30%;height:59px;width:410px; }
+</style>
+
+</head> 
+
+<body >
+{% block header %}
+{% end %}
+{% block content %}
+{% end %}
+	{% raw xsrf_form_html() %}
+
+{% block scripts %}
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+{% end %}
+
+	{% for js in kwargs['js_deps'] %}
+		<script src="{{static_url(js)}}"></script>
+	{% end %}
+</body> 
+
+</html>

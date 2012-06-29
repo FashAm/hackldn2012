@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<div id="splash-header">
+		<div id="logo">
+			<img src="/static/imgs/logo.png"/>
+		</div>
+	</div>
+{% end %}
+
+
+
+{% block content %}
+<center>
+	<div id="splash-content">
+		<div style="padding-bottom:20px">
+			
+		</div>
+
+	</div>
+
+<div style="display:none" id="msg"></div>
+	<label>Hack</label><br>
+	<input style="width: 400px" type="text" id="txtSearch" name="email" value=""></input><br>
+
+	<input style="width:100px" type="button" id="btnSearch" value="Search">
+
+</center>
+{% end %}
+ 
