@@ -6,6 +6,6 @@
 from app.handlers import base,front,hello
 
 url_patterns = [
-    ("/", front.FrontPageHandler),
+    ("/", front.FrontPageHandler)
     ("/hello", hello.HelloHandler)
 ]
