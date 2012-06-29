@@ -1,4 +1,4 @@
-from mongoengine import Document, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField
+from mongoengine import Document, ObjectIdField, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
 
 # ============================ User ================================ #
 class User(Document):
@@ -14,28 +14,28 @@ class User(Document):
     	user.email = email
     	user.username = username
 
-# # ============================ Post ================================ #
-# class Post(Document):
-#     desc = StringField(required=True, default="")
-#     added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)
-#     visibility = ListField(StringField(), required=True, default=list)
-#     comments = ListField(EmbeddedDocumentField(Comment), default=list)
+# ============================ Post ================================ #
+class Post(Document):
+	aid = ObjectIdField(required=True)
+    desc = StringField(required=True, default="")
+    added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)
+    visibility = ListField(StringField(), required=True, default=list)
+    comments = ListField(EmbeddedDocumentField(Comment), default=list)
+    decision = StringField(required=True, default="")
 
-# class Simple_Post(Post):
-# 	url = StringField(required=True, unique=True)
+class Simple_Post(Post):
+	url = StringField(required=True, unique=True)
 
+class Multi_Post(Post):
+	events = ListField(EmbeddedDocumentField(Images), default=list)
 
-# class Multi_Post(Post):
-# 	events = ListField(EmbeddedDocumentField(Images), default=list)
+# ============================ Image ================================ #
+class Images(EmbeddedDocument):
+    url = StringField(required=True, unique=True)
+    votes = IntField(default=0)
 
-# # ============================ Image ================================ #
-# class Images(EmbeddedDocument):
-#     url = StringField(required=True, unique=True)
-#     votes = IntField(default=0)
-
-# # ============================ Comment ================================ #
-# class Comment(EmbeddedDocument):
-#     cid = ObjectIdField(required=True)
-#     body = StringField(required=True)
-#     deleted = BooleanField(default=False)
-#     created = DateTimeField(required=True, default=datetime.datetime.utcnow)
+# ============================ Comment ================================ #
+class Comment(EmbeddedDocument):
+    aid = ObjectIdField(required=True)
+    body = StringField(required=True)
+    created = DateTimeField(required=True, default=datetime.datetime.utcnow)
