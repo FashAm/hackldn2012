@@ -1,4 +1,4 @@
-from mongoengine import Document, ObjectIdField, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
+from mongoengine import Document, ObjectIdField, EmbeddedDocument, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
 import datetime
 import datetime, os
 from PIL import Image
@@ -14,7 +14,7 @@ class ImageSize(EmbeddedDocument):
     size_x = IntField(required=True, default=600)
     size_y = IntField(required=True, default=1024)
 
-class BaseImage(Document):
+class BaseImage(EmbeddedDocument):
     meta = {"collection": "Images"}
     base_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~", "fashamdata", "img")))
     created = DateTimeField(required=True, default=datetime.datetime.utcnow)
@@ -22,6 +22,7 @@ class BaseImage(Document):
     sizes = ListField(EmbeddedDocumentField(ImageSize))
     ext = StringField(required=True, default="jpeg")
     rel_path = StringField(required=True)
+    url = StringField(required=True, unique=True)
     
     def store(self, data, id):
         filename = data['filename']
@@ -41,13 +42,9 @@ class BaseImage(Document):
             # Force RGB.
             if im.mode != 'RGB':
                 im = im.convert('RGB')
-                
-            print im.size
             tmp_size = size.size_x, size.size_y
             #im = square_image(im)
             #im = im.resize(tmp_size, Image.ANTIALIAS)
-            # -NR: Not reviewed yet. This will cause this image not to be found,
-            # and hence return the default.
             full_path = dir+'/'+id + ".jpg"
             im.save(full_path, "JPEG")
         os.remove(path)
@@ -59,4 +56,5 @@ class BaseImage(Document):
 class PostImage(BaseImage):
     rel_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~","fashamdata", "img", "post")))
     sizes = ListField(EmbeddedDocumentField(ImageSize))
+    url = StringField(required=True, unique=True)
         
