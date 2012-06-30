@@ -41,19 +41,21 @@ class BaseImage(Document):
             # Force RGB.
             if im.mode != 'RGB':
                 im = im.convert('RGB')
-    
+                
+            print im.size
             tmp_size = size.size_x, size.size_y
             #im = square_image(im)
-            im = im.resize(tmp_size, Image.ANTIALIAS)
+            #im = im.resize(tmp_size, Image.ANTIALIAS)
             # -NR: Not reviewed yet. This will cause this image not to be found,
             # and hence return the default.
             im.save(dir+'/'+id + "-NR.jpg", "JPEG")
         os.remove(path)
+        return self
             
-# ============================ ProfileImage ================================ #
+# ============================ PostImage ================================ #
 
 
-class ProfileImage(BaseImage):
+class PostImage(BaseImage):
     rel_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~","fashamdata", "img", "post")))
     sizes = ListField(EmbeddedDocumentField(ImageSize))
-  
+        

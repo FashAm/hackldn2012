@@ -1,7 +1,7 @@
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
-from app.model.db import User
-from app.model.image import ProfileImage, ImageSize
+from app.model.user import User
+from app.model.image import PostImage, ImageSize
 import base64
 import uuid
 
@@ -16,23 +16,24 @@ class PostRequestHandler(base.BaseHandler):
         pass
 
     def on_post(self):
-        newjpgtxt = self.request.arguments['myImage'][0]
-        raw_image = {}
-        raw_image['body'] = base64.decodestring(newjpgtxt)
-        id = str(uuid.uuid4())
-        raw_image['filename'] = "image_"+id+".jpeg"
-        self.store_images(raw_image, id) 
+        
+        self.store_images() 
     	self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
 
-    def store_images(self, raw_image, id):
+    def store_images(self):
         '''
         Stores images in the db.
         '''
         try:
-            image = ProfileImage()
+            newjpgtxt = self.request.arguments['myImage'][0]
+            raw_image = {}
+            raw_image['body'] = base64.decodestring(newjpgtxt)
+            id = str(uuid.uuid4())
+            raw_image['filename'] = "image_"+id+".jpeg"
+            image = PostImage()
             size1 = ImageSize()
-            size1.size_x = 576
-            size1.size_y = 1024
+            size1.size_x = 1200
+            size1.size_y = 2048
             size2 = ImageSize()
             size2.size_x = 300
             size2.size_y = 512

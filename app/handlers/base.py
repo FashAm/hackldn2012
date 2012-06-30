@@ -8,7 +8,7 @@ import tornado.web, sys, datetime
 
 from mongoengine import ValidationError #@UnresolvedImport
 from mongoengine.queryset import OperationError, DoesNotExist #@UnresolvedImport
-from app.model.db import *
+from app.model.user import *
 
 class BaseHandler(tornado.web.RequestHandler):
     '''

@@ -1,6 +1,6 @@
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
-from app.model.db import User
+from app.model.user import User
 
 class HelloHandler(base.BaseHandler):
     '''
