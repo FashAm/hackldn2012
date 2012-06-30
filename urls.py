@@ -9,6 +9,6 @@ url_patterns = [
     ("/", home.HomePageHandler),
     ("/hello", hello.HelloHandler),
     ("/login/submit", user.UserLoginHandler),
-    ("/login", user.UserLoginOptionsHandler),
+    #("/login", user.UserLoginOptionsHandler),
     ("/mobile", post.PostRequestHandler),
 ]

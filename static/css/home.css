@@ -1,0 +1,200 @@
+@font-face {
+	font-family: Champagne; 
+	src:url('Font/Champagne & Limousines.ttf');
+}
+
+
+html { padding: 0px; margin: 0px;}
+body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
+
+#description {float: left; height: 100%; width: 28%; }
+#imageSel1, #imageSel2 { visibility: hidden;}
+
+#header {background-color:#685184 ; 
+	     height:60px; width:100%;
+	      position: fixed;  
+	     z-index:1; 
+   -webkit-box-shadow: 0 7px 6px -6px black;
+	   -moz-box-shadow: 5 8px 6px 6px black;
+	        box-shadow: 8 0px 6px 6px black;
+
+
+	 }
+
+	 #headerText {
+	 			position: absolute;
+	 			color: white;
+	 			font-family: 'Champagne';
+	 			font-size: 20px;
+
+	 }
+
+#headerSep {
+	  background-color: #d5bdf2;
+	  height: 2px;
+	   bottom: 0px;
+	   margin-top: 58px;
+}
+
+#main {  position:static; width: 100%;}
+
+#content{ height:100% ; 
+	   -webkit-box-shadow: 0 8px 6px -6px grey;
+	   -moz-box-shadow: 5 8px 6px 6px grey;
+	        box-shadow: 10 0px 6px 6px grey;
+	      border:2px solid;
+	      border-color:#C0C0C0 	;
+	      width: 44% ;
+ 		 margin-left: auto ;
+ 		 margin-right: auto ;
+  		background-color:white;
+}
+
+#footer {  background-color:#626262;   
+	       height:44px;
+           padding: 5px;
+           color:white;
+           font-family: 'Champagne';
+           font-size: 23px;
+           text-align: center;
+           padding-top:15px;
+
+	    }
+
+
+
+#contentTOP {
+	
+	 width: 44% ;
+    margin-left: auto ;
+ 	margin-right: auto ;
+}
+
+a.facebookLogin{
+text-align:center;
+float:right;
+margin-top: 40px;
+margin-right: 20px;
+}
+
+
+#imageL1,#imageR1 {  
+                opacity:0.8;
+                filter:alpha(opacity=80);
+   	            float:left; 
+   	            margin-left: 20px;
+   	            padding-top: 5px;
+                max-width:100%; 
+                max-height:100%;
+    
+   	        } 
+
+table td
+    {
+        height:400px;
+    }
+
+
+button.btn {
+	position:relative;
+	margin-top:10px;
+	margin-left: 50px;
+	font-size: 15px;
+}
+
+
+div.textALLHead{
+	font-size: 25px;
+	line-height:25px;
+	font-family: Helvetica;
+	float: left;
+    padding-left: 25px;
+     padding-top: 25px;
+     font-style: italic;
+
+}
+div.textALLUser{
+	font-size: 18px;
+	font-family: Helvetica;
+    padding-right: 50px;
+    padding-top: 20px;
+    color: grey;
+    font-style: italic;
+    float: right;
+    overflow: hidden;
+}
+
+div.quotesL {
+
+	font-size: 30px;
+	font-family: Helvetica;
+	color:grey;
+
+}
+div.quotesR {
+	font-size: 30px;
+	padding-top: 20px;
+	font-family: Helvetica;
+	color:grey;
+	font-style: italic;
+
+}
+
+div.imagesALL {
+
+	width:68%;
+	height:100%;
+	margin-top: 10px;
+    margin-left: 10px;
+	float: left;
+	overflow: hidden;
+	}
+
+div.category{
+    margin-left: 20px;
+	margin-top: 100px;
+}
+
+
+div.DigIT {
+	position:relative; 
+    height: 50px;
+	width: 280px;
+	background-color: white;
+	opacity: 0.8;
+
+
+}
+
+
+
+div.textOver{
+	position: absolute;
+	z-index: 1;
+	filter:alpha(opacity=50);
+	-moz-opacity:0.5;
+	-khtml-opacity: 0.5;
+	opacity: 0.5;
+
+   margin-top: 310px;
+   width: 278px;
+   height: 60px;
+   visibility: hidden;
+   background-color: #543080;
+ 
+}
+
+
+div.textOverT{
+
+   font-family: 'Champagne';
+   color: white;
+   font-size: 40px;
+   text-align: right;
+   padding-right: 20px;
+   position: relative;
+   opacity: 1.0;
+
+
+}
+
