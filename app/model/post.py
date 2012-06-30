@@ -12,11 +12,13 @@ class Comment(EmbeddedDocument):
 # ============================ Post ================================ #
 class Post(Document):
     meta = {"collection":"Posts"}
-    aid = ObjectIdField(required=True)
+    aid = StringField(required=True)
     desc = StringField(required=True, default="")
     added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)
     visibility = ListField(StringField(), required=True, default=list)
     comments = ListField(EmbeddedDocumentField(Comment), default=list)
     decision = StringField(required=True, default="")
-    images = ListField(PostImage(), required=True, default=list)
+    images = ListField(EmbeddedDocumentField(PostImage), required=True, default=list)
+
+
 

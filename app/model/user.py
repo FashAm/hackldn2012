@@ -15,34 +15,3 @@ class User(Document):
     	self.email = email
     	self.username = username
         self.save()
-
-# ============================ Image ================================ #
-class Images(EmbeddedDocument):
-    meta = {"collection":"Images"}
-    url = StringField(required=True, unique=True)
-    votes = IntField(default=0)
-
-# ============================ Comment ================================ #
-class Comment(EmbeddedDocument):
-    meta = {"collection":"Comments"}
-    aid = ObjectIdField(required=True)
-    body = StringField(required=True)
-    created = DateTimeField(required=True, default=datetime.datetime.utcnow)
-
-# ============================ Post ================================ #
-class Post(Document):
-    meta = {"collection":"Posts"}
-    aid = ObjectIdField(required=True)
-    desc = StringField(required=True, default="")
-    added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)
-    visibility = ListField(StringField(), required=True, default=list)
-    comments = ListField(EmbeddedDocumentField(Comment), default=list)
-    decision = StringField(required=True, default="")
-
-class Simple_Post(Post):
-	url = StringField(required=True, unique=True)
-
-class Multi_Post(Post):
-	events = ListField(EmbeddedDocumentField(Images), default=list)
-
-
