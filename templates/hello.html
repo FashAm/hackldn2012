@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-Kopelia mporei na me ponei o kolos mou alla pale eimai mazi sas... GOOD LUCK!
-{% end%}
+<h1>O SAKIS KAMNI PIPPES</h1>
+
+<h3>Name: {{kwargs["user"].first_name}} </h3>
+<h3>Surname: {{kwargs["user"].last_name}} </h3>
+<h3>Username: {{kwargs["user"].username}} </h3>
+<h3>Email: {{kwargs["user"].email}} </h3>
+{% end %}
 

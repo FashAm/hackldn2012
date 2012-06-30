@@ -2,31 +2,35 @@ from mongoengine import Document, ObjectIdField, EmailField, StringField, DateTi
 import datetime
 # ============================ User ================================ #
 class User(Document):
+    meta = {"collection":"Users"}
     first_name = StringField(required=True)
     last_name = StringField(required=True)
     username = StringField(required=True)
     email = EmailField(required=True, unique=True)
 
     def add_user(self, first_name, last_name, username, email):
-    	user = User()
-    	user.first_name = first_name
-    	user.last_name = last_name
-    	user.email = email
-    	user.username = username
+    	self.first_name = first_name
+    	self.last_name = last_name
+    	self.email = email
+    	self.username = username
+        self.save()
 
 # ============================ Image ================================ #
 class Images(EmbeddedDocument):
+    meta = {"collection":"Images"}
     url = StringField(required=True, unique=True)
     votes = IntField(default=0)
 
 # ============================ Comment ================================ #
 class Comment(EmbeddedDocument):
+    meta = {"collection":"Comments"}
     aid = ObjectIdField(required=True)
     body = StringField(required=True)
     created = DateTimeField(required=True, default=datetime.datetime.utcnow)
 
 # ============================ Post ================================ #
 class Post(Document):
+    meta = {"collection":"Posts"}
     aid = ObjectIdField(required=True)
     desc = StringField(required=True, default="")
     added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)

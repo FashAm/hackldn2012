@@ -1,10 +1,14 @@
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
+from app.model.db import User
 
 class HelloHandler(base.BaseHandler):
     '''
     /hello handler	
     '''
     def on_get(self):
-        self.base_render("hello.html")
+    	#u = User()
+    	#u.add_user("Soulis", "Kasapis", "Kreas", "tsoures@egies.mpe")
+    	u = User.objects
+        self.base_render("hello.html", user = u[1])
 
