@@ -38,8 +38,7 @@ class PostRequestHandler(base.BaseHandler):
                 post.images.append(image)
 
             post.save()
-            
-            #Send notification to the user
+            print "Img received"
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
             
             #Notify the advisors
