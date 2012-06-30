@@ -35,8 +35,10 @@ class PostRequestHandler(base.BaseHandler):
         raw_image = {}
         raw_image['body'] = base64.decodestring(newjpgtxt)
         id = str(uuid.uuid4())
-        raw_image['filename'] = "image_"+id+".jpeg"
-        self.store_images(raw_image, id) 
+        raw_image['filename'] = "img_"+id+".jpeg"
+        print "telos"
+        store_path = self.store_images(raw_image, id) 
+        print "hi__"+store_path
     	self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
 
     def notifier(self):

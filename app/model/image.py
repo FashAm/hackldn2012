@@ -47,8 +47,10 @@ class BaseImage(Document):
             im = im.resize(tmp_size, Image.ANTIALIAS)
             # -NR: Not reviewed yet. This will cause this image not to be found,
             # and hence return the default.
-            im.save(dir+'/'+id + "-NR.jpg", "JPEG")
+            full_path = dir+'/'+id + ".jpg"
+            im.save(full_path, "JPEG")
         os.remove(path)
+        return full_path
             
 # ============================ ProfileImage ================================ #
 
