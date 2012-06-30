@@ -6,7 +6,7 @@ class User(Document):
     first_name = StringField(required=True)
     last_name = StringField(required=True)
     username = StringField(required=True)
-    email = EmailField(required=True, unique=True)
+    email = StringField(required=True, unique=True)
 
     def add_user(self, first_name, last_name, username, email):
     	self.first_name = first_name

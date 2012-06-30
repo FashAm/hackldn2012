@@ -10,5 +10,5 @@ class HelloHandler(base.BaseHandler):
     	#u = User()
     	#u.add_user("Soulis", "Kasapis", "Kreas", "tsoures@egies.mpe")
     	u = User.objects
-        self.base_render("hello.html", user = u[1])
+        self.base_render("hello.html", user = u[0])
 

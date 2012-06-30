@@ -1,11 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<script src=/static/js/libs/jquery-1.4.2.js></script>
+<script src="/static/js/libs/jquery.thumbhover.js"></script>
+<script>
+	$(function(){
+		$("img[src*='_s.jpg']").thumbPopup({imgSmallFlag: "_s",imgLargeFlag: "_l"});
+	});
+</script>
+
 <h1>O SAKIS KAMNI PIPPES</h1>
+
+<img src="/static/imgs/theo_s.jpg"/>
 
 <h3>Name: {{kwargs["user"].first_name}} </h3>
 <h3>Surname: {{kwargs["user"].last_name}} </h3>
 <h3>Username: {{kwargs["user"].username}} </h3>
 <h3>Email: {{kwargs["user"].email}} </h3>
+
 {% end %}
 
