@@ -86,4 +86,5 @@ if __name__ == "__main__":
     config.read(config_file)
     port = int(options.port or config.get(env, "port") or 8888)
     Fasham(env, port, config_file).listen(port)
+    # tornado.ioloop.DEFAULT_TIMEOUT = 50000
     tornado.ioloop.IOLoop.instance().start()
