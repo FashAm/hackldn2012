@@ -1,5 +1,5 @@
 from mongoengine import Document, ObjectIdField, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
-
+import datetime
 # ============================ User ================================ #
 class User(Document):
     first_name = StringField(required=True)
@@ -14,9 +14,20 @@ class User(Document):
     	user.email = email
     	user.username = username
 
+# ============================ Image ================================ #
+class Images(EmbeddedDocument):
+    url = StringField(required=True, unique=True)
+    votes = IntField(default=0)
+
+# ============================ Comment ================================ #
+class Comment(EmbeddedDocument):
+    aid = ObjectIdField(required=True)
+    body = StringField(required=True)
+    created = DateTimeField(required=True, default=datetime.datetime.utcnow)
+
 # ============================ Post ================================ #
 class Post(Document):
-	aid = ObjectIdField(required=True)
+    aid = ObjectIdField(required=True)
     desc = StringField(required=True, default="")
     added_on = DateTimeField(required=True, default=datetime.datetime.utcnow)
     visibility = ListField(StringField(), required=True, default=list)
@@ -29,13 +40,4 @@ class Simple_Post(Post):
 class Multi_Post(Post):
 	events = ListField(EmbeddedDocumentField(Images), default=list)
 
-# ============================ Image ================================ #
-class Images(EmbeddedDocument):
-    url = StringField(required=True, unique=True)
-    votes = IntField(default=0)
 
-# ============================ Comment ================================ #
-class Comment(EmbeddedDocument):
-    aid = ObjectIdField(required=True)
-    body = StringField(required=True)
-    created = DateTimeField(required=True, default=datetime.datetime.utcnow)

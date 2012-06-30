@@ -1,6 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-Constantinos Christou and Emilios Nicolaou will do magic here!!!! Come back later this weekened and check it out.
-{% end%}
-

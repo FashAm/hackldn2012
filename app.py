@@ -13,16 +13,18 @@ from dependencies import css_deps, js_deps
 from mongoengine import connect #@UnresolvedImport
 from optparse import OptionParser #@UnresolvedImport
 
-class NotesLib(tornado.web.Application):
+class Fasham(tornado.web.Application):
     def __init__(self, env, port, config_file):
-	self.APP_NAME = "hackldn-" + str(port)
+	self.APP_NAME = "fasham-" + str(port)
 	
 	settings = {
                     'static_path'   : "static",
                     'template_path' : "templates",
                     'cookie_secret' : "aKlRsPkySWyOqByxAQfLsKMbEAKj3ErRtg1RgkBUQ6E=noteslib",
                     'xsrf_cookies'  : True,
-                    'autoescape'    : "xhtml_escape"
+                    'autoescape'    : "xhtml_escape",
+                    'facebook_api_key': "431893480184932",
+                    'facebook_secret': "810bec79e4614b5d3cf338f37dc41b70"
                     }
 
 	config = ConfigParser.RawConfigParser()
@@ -82,5 +84,5 @@ if __name__ == "__main__":
     config = ConfigParser.RawConfigParser()
     config.read(config_file)
     port = int(options.port or config.get(env, "port") or 8888)
-    NotesLib(env, port, config_file).listen(port)
+    Fasham(env, port, config_file).listen(port)
     tornado.ioloop.IOLoop.instance().start()
