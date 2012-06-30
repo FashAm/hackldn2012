@@ -41,6 +41,7 @@ class PostRequestHandler(base.BaseHandler):
             post.visibility = ["xrends", "special"]
             post.images.append(img)
             post.save()
+            print "Img received"
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
         except Exception,e :
             print "Error"+str(e)
