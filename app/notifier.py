@@ -13,9 +13,6 @@ class Twilio(object):
 	def send_sms(self,gitto_number,sms_text):
 		message = self.client.sms.messages.create(to=to_number, from_=self.from_number,body=sms_text)
 
-t = Twilio()
-t.send_sms('0000','Placeholder')
-
 
 
 

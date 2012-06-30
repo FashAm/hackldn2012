@@ -1,32 +1,16 @@
+import base64
+import uuid
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
 from app.model.user import User
 from app.model.post import Post
 from app.model.image import PostImage, ImageSize
-import base64
-import uuid
+from app.notifier import Twilio
 
 class PostRequestHandler(base.BaseHandler):
     '''
     Render the post request
     '''
-    def on_get(self):
-    	print 'mobile get'
-        #Select a hardcoded user for the prototype
-        u = self.db.Users.find_one({"username":"GeorgeMakkoulis"})
-        #Add some friends
-        friends = []
-        friends.append({
-            "name":"Joanna",
-            "phone":"0700000000"
-            })
-        print friends
-        self.db.Users.update({'username':u["username"]},{"$set":{'friends' :friends}});
-
-        print u['username']
-        for u in users:
-            print u
-        self.notifier()
 
     def check_xsrf_cookie(self): 
         pass
@@ -39,17 +23,27 @@ class PostRequestHandler(base.BaseHandler):
                 imgs.append(self.request.arguments[img_name][0])
             images = self.store_images(imgs) 
             
+            #Create post object
             post = Post()
             post.aid = self.request.arguments['userId'][0]
             post.desc = self.request.arguments['description'][0]
-            post.tags = self.request.arguments['tag']
-            post.visibility = self.request.arguments['visibility']
+            
+            for tag in self.request.arguments['tag'].split(';'):
+                post.tags.append(tag)
+            
+            for modifier in self.request.arguments['visibility'].split(';'):    
+                post.visibility.append(modifier)
             
             for image in images:
                 post.images.append(image)
 
             post.save()
+            
+            #Send notification to the user
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
+            
+            #Notify the advisors
+            self.notify()
         except Exception,e :
             print "Error"+str(e)
 
@@ -79,3 +73,7 @@ class PostRequestHandler(base.BaseHandler):
             return imgs
         except Exception, e:
             self.xhr_response = "err,An error occured."
+
+    def notify(self):
+        t = Twilio()
+        t.send_sms('07512135628','This is a testing sms from fash.am')
