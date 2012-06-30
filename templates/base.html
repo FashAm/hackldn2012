@@ -20,11 +20,11 @@
 			Fash.am
 		{% end %}
 	</title>
-<style type="text/css">
-body { background-repeat:repeat-x; background-image:url('/static/imgs/back.jpg');}
-div.txtSearchArea {background-repeat:no-repeat; background-image:url('/static/imgs/searchbar.jpg');width:500px;margin:0 auto;}
-div.btnStyle {margin-left:30%;height:59px;width:410px; }
-</style>
+	<link href="{{static_url('css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{static_url('css/bootstrap-responsive.css')}}" rel="stylesheet">
+	{% for css in kwargs['css_deps'] %}
+		<link rel="stylesheet" href="{{static_url(css)}}" type="text/css" />
+	{% end %}
 </head> 
 
 <body >
@@ -35,11 +35,11 @@ div.btnStyle {margin-left:30%;height:59px;width:410px; }
 	{% raw xsrf_form_html() %}
 
 {% block scripts %}
-{% end %}
-
+	
 	{% for js in kwargs['js_deps'] %}
 		<script src="{{static_url(js)}}"></script>
 	{% end %}
+{% end %}
 </body> 
 
 </html>

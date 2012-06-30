@@ -1,6 +1,144 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 align="center">O SAKIS KAMNI PIPPES</h1>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+
+
+<div id="header">   
+  <a href="" class="facebookLogin"><img src="static/imgs/home_imgs/fb1.png" onmouseover="this.src='static/imgs/home_imgs/fb2.png'" onmouseout="this.src='static/imgs/home_imgs/fb1.png'"  /> </a> 
+  <span id="headerText"> <img src="static/imgs/home_imgs/button.png" style="margin:auto;display:block;">  </span><div id="headerSep"></div> 
+</div>  
+
+<div id="main">  
+</br></br></br></br>
+  <div id="contentTOP">
+     <span>  <img src="static/imgs/home_imgs/logo.png" style="display:block; width:320px; margin:auto;">  </span>
+  </div>
+	<div id="content" >
+
+     <table class="table" style=" width:100%;  ">
+        <tbody >
+          <tr> <td> 
+              <div class="imagesALL">      
+
+                    <a class="thumbnail" style="float:left;"  onclick="makeSelection('IMAGE1','IMAGE2');" > 
+                        <div class="textOverRed" id="textOverId"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE1" src="Content/image1.jpg" width="250PX" onmouseover="showTip('textOverId')"  onmouseout="hideTip('textOverId')"  > 
+                    </a>
+                   <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE2','IMAGE1');">
+                        <div class="textOverBlue" id="textOverId2"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE2"  src="Content/image2.jpg" width="250PX" onmouseover="showTip('textOverId2')"  onmouseout="hideTip('textOverId2')" >
+                   </a>
+
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Date! HELP!!  
+                <div class="textALLUser" id="USER"> by Elle  </div>    </br>
+                 <div>
+    
+
+  
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+               </div> 
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                </div>  
+               </div> 
+              
+              </div>
+          </td> </tr>
+
+
+          <tr> <td>
+            <div class="imagesALL">                 
+   
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE3','IMAGE4');" >
+                        <div class="textOverRed" id="textOverId3"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE3" alt="N/A"  src="Content/image3.jpg" width="250PX" onmouseover="showTip('textOverId3')"  onmouseout="hideTip('textOverId3')"> 
+                     </a>
+
+
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE4','IMAGE3');">
+                        <div class="textOverBlue" id="textOverId4"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE4" alt="N/A"  src="Content/image4.jpg" width="250PX" onmouseover="showTip('textOverId4')"  onmouseout="hideTip('textOverId4')">
+                    </a>
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Night out (bar)  
+                <div class="textALLUser" id="USER"> by Joanna  </div>    
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+               </div> 
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">H&M accessories</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+                </div>  
+
+               </div> 
+              
+              </div>
+          </td> </tr>  
+
+          <tr> <td>
+            <div class="imagesALL">                 
+   
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE5','IMAGE6');" >
+                        <div class="textOverRed" id="textOverId5"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE5" src="Content/image5.jpg" width="250PX" onmouseover="showTip('textOverId5')"  onmouseout="hideTip('textOverId5')"> 
+                     </a>
+
+
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE6','IMAGE5');">
+                        <div class="textOverBlue" id="textOverId6"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE6" src="Content/image6.jpg" width="250pX" onmouseover="showTip('textOverId6')"  onmouseout="hideTip('textOverId6')">
+                    </a>
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Formal meeting  
+                <div class="textALLUser" id="USER"> by Maria </div>    
+
+                <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica"> Gucci skirt </span> </div>
+               
+                      <div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                </div>  </div> 
+
+              
+              </div>      
+
+          </td> </tr>
+          <tr> <td style="height:70%; margin-left:auto; margin-right:auto;"/>
+            <a href="http://www.gucci.com/" target="_blank"> <img src="static/imgs/home_imgs/banner.jpg" style="margin:auto;display:block;"> </a>
+           
+
+
+          </td> </tr>  
+          <tr> <td></td> </tr>
+   
+  
+      </table>
+     </div>
+</div>
+</br>
+<div id="footer"> about us   <span style="padding-left:50px"> contact us </span> </div> 
+
 {% end%}
+
 

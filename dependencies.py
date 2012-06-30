@@ -5,14 +5,13 @@
 # CSS Dependencies.
 css_deps = ("css", "css",
             [
-             
+              ("/", ["Joanna.css"]),
             ])
 
 # JS Dependencies.
 js_deps = ("js", "js",
             [
-             ("/mock_image",["/libs/posts.js"]),
-             ("/", ["home.js"]),
+             ("/", ["joanna.js", "home.js"]),
              		
 	    ])
 
