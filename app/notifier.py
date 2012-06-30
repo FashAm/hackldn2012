@@ -10,7 +10,7 @@ class Twilio(object):
 		# self.from_number = "+1 567-245-0765"
 		self.from_number = "forced error"
 
-	def send_sms(self,gitto_number,sms_text):
+	def send_sms(self,to_number,sms_text):
 		message = self.client.sms.messages.create(to=to_number, from_=self.from_number,body=sms_text)
 
 

@@ -28,10 +28,10 @@ class PostRequestHandler(base.BaseHandler):
             post.aid = self.request.arguments['userId'][0]
             post.desc = self.request.arguments['description'][0]
             
-            for tag in self.request.arguments['tag'].split(';'):
+            for tag in self.request.arguments['tag'][0].split(';'):
                 post.tags.append(tag)
             
-            for modifier in self.request.arguments['visibility'].split(';'):    
+            for modifier in self.request.arguments['visibility'][0].split(';'):    
                 post.visibility.append(modifier)
             
             for image in images:
