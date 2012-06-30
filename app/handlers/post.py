@@ -32,8 +32,6 @@ class PostRequestHandler(base.BaseHandler):
 
     def on_post(self):        
         path = self.store_images() 
-        #Dame to post
-        print path
     	self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
 
     def store_images(self):
