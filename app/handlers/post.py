@@ -3,7 +3,7 @@ from mongoengine.queryset import DoesNotExist
 from app.model.db import User
 import base64
 
-class OutputPostRequestHandler(base.BaseHandler):
+class PostRequestHandler(base.BaseHandler):
     '''
     Render the post request
     '''

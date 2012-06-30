@@ -3,12 +3,12 @@
 # Author: Giorgos Eracleous #
 #############################
 
-from app.handlers import base,home,hello, user, posts, mobile
+from app.handlers import base,home,hello, user, post
 
 url_patterns = [
     ("/", home.HomePageHandler),
     ("/hello", hello.HelloHandler),
     ("/login/submit", user.UserLoginHandler),
     ("/login", user.UserLoginOptionsHandler),
-    ("/mobile", mobile.OutputPostRequestHandler),
+    ("/mobile", post.PostRequestHandler),
 ]
