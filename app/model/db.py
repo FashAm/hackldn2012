@@ -7,6 +7,7 @@ class User(Document):
     last_name = StringField(required=True)
     username = StringField(required=True)
     email = StringField(required=True, unique=True)
+    friends = ListField()
 
     def add_user(self, first_name, last_name, username, email):
     	self.first_name = first_name

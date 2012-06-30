@@ -8,7 +8,22 @@ class PostRequestHandler(base.BaseHandler):
     Render the post request
     '''
     def on_get(self):
-    	print 'koukou'
+    	print 'mobile get'
+        #Select a hardcoded user for the prototype
+        u = self.db.Users.find_one({"username":"GeorgeMakkoulis"})
+        #Add some friends
+        friends = []
+        friends.append({
+            "name":"Joanna",
+            "phone":"0700000000"
+            })
+        print friends
+        self.db.Users.update({'username':u["username"]},{"$set":{'friends' :friends}});
+
+        print u['username']
+        # for u in users:
+            # print u
+        self.notifier()
         self.base_render("mobile.html", user = 'hii')
 
     def check_xsrf_cookie(self): 
@@ -22,4 +37,10 @@ class PostRequestHandler(base.BaseHandler):
     	g.close()
         #Response back text
     	self.write('pampos')
+
+    def notifier(self):
+        #Notify Experts
+        #Notify Friends
+        print "notifier"
+        pass
 
