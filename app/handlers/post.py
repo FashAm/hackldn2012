@@ -10,14 +10,30 @@ class PostRequestHandler(base.BaseHandler):
     Render the post request
     '''
     def on_get(self):
-        self.base_render("mobile.html", user = 'hii')
+    	print 'mobile get'
+        #Select a hardcoded user for the prototype
+        u = self.db.Users.find_one({"username":"GeorgeMakkoulis"})
+        #Add some friends
+        friends = []
+        friends.append({
+            "name":"Joanna",
+            "phone":"0700000000"
+            })
+        print friends
+        self.db.Users.update({'username':u["username"]},{"$set":{'friends' :friends}});
+
+        print u['username']
+        # for u in users:
+            # print u
+        self.notifier()
 
     def check_xsrf_cookie(self): 
         pass
 
-    def on_post(self):
-        
-        self.store_images() 
+    def on_post(self):        
+        path = self.store_images() 
+        #Dame to post
+        print path
     	self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
 
     def store_images(self):
@@ -39,6 +55,6 @@ class PostRequestHandler(base.BaseHandler):
             size2.size_y = 512
             image.sizes = list([size1, size2])
             #image.save()
-            image.store(raw_image, id)
+            return image.store(raw_image, id)
         except Exception, e:
             self.xhr_response = "err,An error occured."

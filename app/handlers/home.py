@@ -6,5 +6,5 @@ class HomePageHandler(base.BaseHandler):
     Renders the home page.	
     '''
     def on_get(self):
-        self.base_render("home.html")
+        self.base_render("home.htm")
 

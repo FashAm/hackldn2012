@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link type="text/css" rel="stylesheet" href="static/css/home.css" />
+    <link href="static/css/bootstrap.css" rel="stylesheet"> 
+	
+
+    <!-- Le styles -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+
+
+<script type="text/javascript">
+
+ function showTip(id){ document.getElementById(id).style.visibility = 'visible'; }
+ function hideTip(id){ document.getElementById(id).style.visibility= 'hidden'; console.log('CHECKARISMA') }
+
+ var lock=0; 
+ function makeSelection(idA, idB) {
+  if (lock==0){
+   document.getElementById(idB).style.opacity=0.2; 
+   document.getElementById(idB).filters.alpha.opacity=20; 
+   document.getElementById(idA).style.opacity=1.0; 
+   document.getElementById(idA).filters.alpha.opacity=100; 
+
+   lock=1;
+}
+} 
+ 
+</script>
+
+  </head>
+
+
+  <body>
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/bootstrap/js/jquery.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-transition.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-alert.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-dropdown.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-scrollspy.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-tab.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-tooltip.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-popover.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-button.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-collapse.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-carousel.js"></script>
+    <script src="static/js/bootstrap/js/bootstrap-typeahead.js"></script>
+
+
+
+ <!-- CONTAINER -->
+
+<div id="header"> <span id="headerText">  </span><div id="headerSep"></div> </div>  
+<div id="main">  
+
+</br></br></br></br>
+
+  <div id="contentTOP">
+     <img src="static/imgs/home_imgs/logo.png" style="margin-left:20px;">   
+      <a href="/login/submit" class="facebookLogin"><img src="static/imgs/home_imgs/fb1.png" onmouseover="this.src='static/imgs/home_imgs/fb2.png'" onmouseout="this.src='static/imgs/home_imgs/fb1.png'"  /> </a> 
+  </div>
+	<div id="content" >
+
+     <table class="table" style=" width:100%;  ">
+        <tbody >
+          <tr> <td> 
+              <div class="imagesALL">      
+
+                    <a class="thumbnail" style="float:left;"  onclick="makeSelection('IMAGE1','IMAGE2');" > 
+                        <div class="textOver" id="textOverId"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE1" src="static/content/image1.jpg" width="278PX" onmouseover="showTip('textOverId')"  onmouseout="hideTip('textOverId')"  > 
+                    </a>
+                   <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE2','IMAGE1');">
+                        <div class="textOver" id="textOverId2"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE2"  src="static/content/image2.jpg" width="278PX" onmouseover="showTip('textOverId2')"  onmouseout="hideTip('textOverId2')" >
+                   </a>
+
+              </div>     
+
+              <div id="description">
+                <div id = "TITLE" class="textALLHead"> Date! HELP!!  
+                  <div class="textALLUser" id="USER"> by Elle </div>    
+                  <div class="category">  <span id="TAG" class="label label-important" style="font-size:15px; font-family:Helvetica"> Night-Out</span> 
+                </div>
+               </div> 
+              
+              </div>
+          </td> </tr>
+          
+          <tr> <td style="height:100px;"> 
+             <img src="static/imgs/home_imgs/banner.jpg" style=" margin-left:auto; margin-right:auto; width:100%" ></td> </tr>  
+      </table>
+     </div>
+</div>
+</br>
+<div id="footer"> about us   <span style="padding-left:50px"> contact us </span> </div> 
+
+
+
+
+  </body>
+</html>
