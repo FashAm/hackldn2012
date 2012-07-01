@@ -18,7 +18,8 @@ class Post(Document):
     visibility = ListField(StringField(), required=True, default=list)
     comments = ListField(EmbeddedDocumentField(Comment), default=list)
     decision = StringField(required=True, default="")
-    tags = ListField(StringField(), required=True, default=list)
+    tags1 = ListField(StringField(), required=True, default=list)
+    tags2 = ListField(StringField(), required=True, default=list)
     images = ListField(EmbeddedDocumentField(PostImage), required=True, default=list)
 
 

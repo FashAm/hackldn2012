@@ -27,20 +27,26 @@ class PostRequestHandler(base.BaseHandler):
             post.aid = self.request.arguments['userId'][0]
             
             post.desc = self.request.arguments['description'][0]
-            for tag in self.request.arguments['tag'][0].split(';'):
-                post.tags.append(tag)
+            
+            for tag in self.request.arguments['tag1'][0].split('\n'):
+                post.tags1.append(tag)
+            
+            for tag in self.request.arguments['tag2'][0].split('\n'):
+                post.tags2.append(tag)
+                
+            phone_no = self.request.arguments['phoneNumber'][0]
             
             for modifier in self.request.arguments['visibility'][0].split(';'):    
                 post.visibility.append(modifier)
             
             for image in images:
                 post.images.append(image)
-                
+            
             post.save()
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
             
             #Notify the advisors
-            #self.notify()
+            self.notify(customer_name=post.aid, phone_no=phone_no)
         except Exception,e :
             print "Error"+str(e)
 
@@ -71,6 +77,6 @@ class PostRequestHandler(base.BaseHandler):
         except Exception, e:
             self.xhr_response = "err,An error occured."
 
-    def notify(self):
+    def notify(self, customer_name, phone_no):
         t = Twilio()
-        t.send_sms('07512135628','This is a testing sms from fash.am')
+        t.send_sms(str(phone_no),'Your friend '+customer_name+" would like your opinion on what to wear. Click here: www.fash.am/help-your-friend .")
