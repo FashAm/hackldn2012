@@ -43,7 +43,7 @@
 
               <div id="description">
 	              <div id = "TITLE" class="textALLHead"> {{post.desc}}  
-	               <div class="textALLUser" id="USER"> by {{post.aid}}  </div>    </br>
+	               <div class="textALLUser" id="USER"> by {{post.aid}}  </div>    </br></br>
 	                 <div id="blueTags{{i}}">
 	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">armani </span> </div>
 	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">shirt </span> </div>
@@ -62,13 +62,15 @@
           <tr> <td> 
               <div class="imagesALL">      
 
-                    <a class="thumbnail" style="float:left;"  onclick="makeSelection('IMAGE1','IMAGE2');" > 
+                    <a class="thumbnail" style="float:left;"  onclick="makeSelection('IMAGE1','IMAGE2');ShowHide('blueTags1','redTags1');" > 
                         <div class="textOverRed" id="textOverId"><div class="textOverT"> vote!</div></div>
-                        <img id="IMAGE1" src="static/imgs/hardcoded/image1.jpg" width="250PX" onmouseover="showTip('textOverId')"  onmouseout="hideTip('textOverId')"  > 
+                        <img id="IMAGE1" src="static/imgs/hardcoded/image1.jpg" width="250PX" onmouseover="showTip('textOverId');ShowHide('blueTags1','redTags1');"  
+                        onmouseout="hideTip('textOverId'); showTagsALL('redTags1','blueTags1');"  > 
                     </a>
-                   <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE2','IMAGE1');">
+                   <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE2','IMAGE1');ShowHide('redTags1','blueTags1');">
                         <div class="textOverBlue" id="textOverId2"><div class="textOverT"> vote!</div></div>
-                        <img id="IMAGE2"  src="static/imgs/hardcoded/image2.jpg" width="250PX" onmouseover="showTip('textOverId2')"  onmouseout="hideTip('textOverId2')" >
+                        <img id="IMAGE2"  src="static/imgs/hardcoded/image2.jpg" width="250PX" onmouseover="showTip('textOverId2');ShowHide('redTags1','blueTags1');" 
+                         onmouseout="hideTip('textOverId2');showTagsALL('redTags1','blueTags1');" >
                    </a>
 
               </div>     
@@ -76,15 +78,12 @@
               <div id="description">
               <div id = "TITLE" class="textALLHead"> Date! HELP!!  
                 <div class="textALLUser" id="USER"> by Elle  </div>    </br>
-                 <div>
-    
-
-  
+                 <div id="blueTags1">
                   <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
                   <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
                </div> 
 
-                <div>
+                <div id="redTags1">
                   <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
                   <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
                 </div>  
@@ -99,13 +98,13 @@
    
                     <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE3','IMAGE4');" >
                         <div class="textOverRed" id="textOverId3"><div class="textOverT"> vote!</div></div>
-                        <img id="IMAGE3" alt="N/A"  src="static/imgs/hardcoded/image3.jpg" width="250PX" onmouseover="showTip('textOverId3')"  onmouseout="hideTip('textOverId3')"> 
+                        <img id="IMAGE3" alt="N/A"  src="static/imgs/hardcoded/image3.jpg" width="250PX" onmouseover="showTip('textOverId3');ShowHide('redTags2','blueTags2');"  onmouseout="hideTip('textOverId3');showTagsALL('redTags2','blueTags2');"> 
                      </a>
 
 
                     <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE4','IMAGE3');">
                         <div class="textOverBlue" id="textOverId4"><div class="textOverT"> vote!</div></div>
-                        <img id="IMAGE4" alt="N/A"  src="static/imgs/hardcoded/image4.jpg" width="250PX" onmouseover="showTip('textOverId4')"  onmouseout="hideTip('textOverId4')">
+                        <img id="IMAGE4" alt="N/A"  src="static/imgs/hardcoded/image4.jpg" width="250PX" onmouseover="showTip('textOverId4');ShowHide('blueTags2','redTags2');"  onmouseout="hideTip('textOverId4');showTagsALL('redTags2','blueTags2');">
                     </a>
               </div>     
 
@@ -113,15 +112,15 @@
               <div id = "TITLE" class="textALLHead"> Night out (bar)  
                 <div class="textALLUser" id="USER"> by Joanna  </div>    
 
-                <div>
+                <div id="redTags2">
                   <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
                   <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
                   <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
                </div> 
 
-                <div>
+                <div id="blueTags2">
                   <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">H&M accessories</span> </div>
-                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">D&G Jeans </span> </div>
                   <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
                 </div>  
 
@@ -129,6 +128,37 @@
               
               </div>
           </td> </tr>  
+
+          <tr> <td>
+            <div class="imagesALL">                 
+   
+                     <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE5','IMAGE6');" >
+                        <div class="textOverRed" id="textOverId5"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE5" src="static/imgs/hardcoded/image5.jpg" width="250PX" onmouseover="showTip('textOverId5');ShowHide('redTags3','blueTags3');"  onmouseout="hideTip('textOverId5');showTagsALL('redTags3','blueTags3');"> 
+                     </a>
+
+
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE6','IMAGE5');">
+                        <div class="textOverBlue" id="textOverId6"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE6" src="static/imgs/hardcoded/image6.jpg" width="250pX" onmouseover="showTip('textOverId6');ShowHide('blueTags3','redTags3');"  onmouseout="hideTip('textOverId6');showTagsALL('redTags3','blueTags3');">
+                    </a>
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Formal meeting  
+                <div class="textALLUser" id="USER"> by Maria </div>    
+
+                <div class="category" id="redTags3">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica"> Gucci skirt </span> </div>
+               
+                      <div id="blueTags3">
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                </div>  </div> 
+
+              
+              </div>      
+
+          </td> </tr>
 	 	 
       </table>
      </div>
