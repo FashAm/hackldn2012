@@ -1,6 +1,6 @@
 @font-face {
 	font-family: Champagne; 
-	src:url('Font/Champagne & Limousines.ttf');
+	src:url('/static/font/Champagne & Limousines.ttf');
 }
 
 
@@ -17,14 +17,12 @@ body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
    -webkit-box-shadow: 0 7px 6px -6px black;
 	   -moz-box-shadow: 5 8px 6px 6px black;
 	        box-shadow: 8 0px 6px 6px black;
-
-
 	 }
 
-	 #headerText {
+#headerText {
 	 			position: absolute;
 	 			color: white;
-	 			font-family: 'Champagne';
+	 			font-family: Champagne;
 	 			font-size: 20px;
 	 			width: 99%;
 
@@ -33,8 +31,8 @@ body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
 	 }
 
 #headerSep {
-	  background-color: #d5bdf2;
-	  height: 2px;
+	   background-color: #d5bdf2;
+	   height: 2px;
 	   bottom: 0px;
 	   margin-top: 58px;
 }
@@ -45,11 +43,11 @@ body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
 	   -webkit-box-shadow: 0 8px 6px -6px grey;
 	   -moz-box-shadow: 5 8px 6px 6px grey;
 	        box-shadow: 10 0px 6px 6px grey;
-	      border:2px solid;
-	      border-color:#C0C0C0 	;
-	      width: 800px; ;
- 		 margin-left: auto ;
- 		 margin-right: auto ;
+	    border:2px solid;
+	    border-color:#C0C0C0 	;
+	    width: 800px; ;
+ 		margin-left: auto ;
+ 		margin-right: auto ;
   		background-color:white;
 }
 
@@ -57,7 +55,7 @@ body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
 	       height:44px;
            padding: 5px;
            color:white;
-           font-family: 'Champagne';
+           font-family: Champagne;
            font-size: 23px;
            text-align: center;
            padding-top:15px;
@@ -81,16 +79,6 @@ margin-right: 20px;
 }
 
 
-#imageL1,#imageR1 {  
-                opacity:0.8;
-                filter:alpha(opacity=80);
-   	            float:left; 
-   	            margin-left: 20px;
-   	            padding-top: 5px;
-                max-width:100%; 
-                max-height:100%;
-    
-   	        } 
 
 table td
     {
@@ -107,17 +95,17 @@ button.btn {
 
 
 div.textALLHead{
-	font-size: 25px;
+	font-size: 35px;
 	line-height:25px;
-	font-family: Helvetica;
+	font-family: Champagne;
 	float: left;
     padding-left: 25px;
      padding-top: 25px;
 
 }
 div.textALLUser{
-	font-size: 18px;
-	font-family: Helvetica;
+	font-size: 22px;
+	font-family: Champagne;
     padding-right: 50px;
     padding-top: 0px;
     color: grey;
@@ -153,8 +141,8 @@ div.imagesALL {
 }
 
 div.category{
-    
-	margin-top: 4px;
+    padding-top: 5px;
+	margin-top: 5px;
 	float: left;
 }
 
@@ -182,7 +170,7 @@ div.textOverBlue{
     width: 250px;
     height: 60px;
     visibility: hidden;
-    background-color: #404180;
+    background-color: #3a87ad;
  
 }
 div.textOverRed{
@@ -202,7 +190,7 @@ div.textOverRed{
 
 div.textOverT{
 
-   font-family: 'Champagne';
+   font-family:Champagne;
    color: white;
    font-size: 40px;
    float:bottom;

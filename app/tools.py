@@ -54,3 +54,4 @@ def invalidate_static_url_cache(path):
     """
     if path in static_url_hashes:
         del static_url_hashes[path]
+        

@@ -1,5 +1,5 @@
 from mongoengine import Document, ObjectIdField, EmbeddedDocument, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
-import datetime
+import datetime, re
 import datetime, os
 from PIL import Image
 from mongoengine import StringField, EmbeddedDocumentField #@UnresolvedImports 
@@ -16,7 +16,7 @@ class ImageSize(EmbeddedDocument):
 
 class BaseImage(EmbeddedDocument):
     meta = {"collection": "Images"}
-    base_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~", "fashamdata", "img")))
+    base_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~/", "fashamdata", "img")))
     created = DateTimeField(required=True, default=datetime.datetime.utcnow)
     type = StringField(required=True, default="image/jpeg")
     sizes = ListField(EmbeddedDocumentField(ImageSize))
@@ -33,8 +33,9 @@ class BaseImage(EmbeddedDocument):
         f = open(path,'w')
         f.write(data['body'])
         f.close()
+        
         for size in self.sizes:
-            dir = self.rel_path+'/'+str(size.size_x)+'/'+id[-1]+'/'+id[-2]+'/'
+            dir = self.rel_path+'/'+str(size.size_x)+'/'+id[-1]+'/'+id[-2]
             if not os.path.exists(dir):
                 os.makedirs(dir)
             im = Image.open(path)
@@ -47,14 +48,20 @@ class BaseImage(EmbeddedDocument):
             #im = im.resize(tmp_size, Image.ANTIALIAS)
             full_path = dir+'/'+id + ".jpg"
             im.save(full_path, "JPEG")
+
         os.remove(path)
-        return full_path
+        
+        real_path = os.path.expanduser(os.path.join("~/","fashamdata"))
+        reg = re.compile(real_path)
+        
+        return reg.sub("/obj",full_path)
             
 # ============================ PostImage ================================ #
 
 
 class PostImage(BaseImage):
-    rel_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~","fashamdata", "img", "post")))
+    rel_path = StringField(required=True, default=lambda: os.path.expanduser(os.path.join("~/","fashamdata", "img", "post")))
     sizes = ListField(EmbeddedDocumentField(ImageSize))
     url = StringField(required=True, unique=True)
+
         

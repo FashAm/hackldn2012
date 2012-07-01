@@ -22,12 +22,11 @@ class PostRequestHandler(base.BaseHandler):
                 img_name = 'myImage' + str(i) 
                 imgs.append(self.request.arguments[img_name][0])
             images = self.store_images(imgs) 
-            
             #Create post object
             post = Post()
             post.aid = self.request.arguments['userId'][0]
-            post.desc = self.request.arguments['description'][0]
             
+            post.desc = self.request.arguments['description'][0]
             for tag in self.request.arguments['tag'][0].split(';'):
                 post.tags.append(tag)
             
@@ -36,12 +35,12 @@ class PostRequestHandler(base.BaseHandler):
             
             for image in images:
                 post.images.append(image)
-
+                
             post.save()
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
             
             #Notify the advisors
-            self.notify()
+            #self.notify()
         except Exception,e :
             print "Error"+str(e)
 
