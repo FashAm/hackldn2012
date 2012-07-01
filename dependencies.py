@@ -6,6 +6,7 @@
 css_deps = ("css", "css",
             [
               ("/", ["Joanna.css"]),
+              ("/trending", ["trending.css"]),
             ])
 
 # JS Dependencies.

@@ -2,7 +2,15 @@
 	font-family: Champagne; 
 	src:url('/static/font/Champagne & Limousines.ttf');
 }
+a.rollover {
+	background-image: url('/static/imgs/home_imgs/btnT1.png');
+}
 
+a.rollover:hover {
+	background-image: url('/static/imgs/home_imgs/btnT2.png');
+}
+
+a.explore {background-image: url('/static/imgs/home_imgs/btnE.png');} 
 
 html { padding: 0px; margin: 0px;}
 body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}

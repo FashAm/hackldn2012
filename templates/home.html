@@ -11,7 +11,12 @@
 
 <div id="header">   
   <a href="" class="facebookLogin"><img src="static/imgs/home_imgs/fb1.png" onmouseover="this.src='static/imgs/home_imgs/fb2.png'" onmouseout="this.src='static/imgs/home_imgs/fb1.png'"  /> </a> 
-  <span id="headerText"> <img src="static/imgs/home_imgs/button.png" style="margin:auto;display:block;">  </span><div id="headerSep"></div> 
+  <span id="headerText">
+ <a href="/trending">
+   <img src="static/imgs/home_imgs/button.png" style="margin:auto;display:block;">
+   </a>
+   
+     </span><div id="headerSep"></div> 
 </div>  
 
 <div id="main">  
@@ -40,20 +45,91 @@
 	              <div id = "TITLE" class="textALLHead"> {{post.desc}}  
 	               <div class="textALLUser" id="USER"> by {{post.aid}}  </div>    </br>
 	                 <div id="blueTags{{i}}">
-	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
-	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">armani </span> </div>
+	                  	<div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">shirt </span> </div>
 	                 </div> 
 	
 	                 <div id="redTags{{i}}">
-	                  	<div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
-	                  	<div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+	                  	<div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">topshop</span> </div>
+	                  	<div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">shirt </span> </div>
 	                 </div>  
                   </div> 
               
               </div>
           </td> </tr>
 	 	 {% end %}
-      
+	 	 
+          <tr> <td> 
+              <div class="imagesALL">      
+
+                    <a class="thumbnail" style="float:left;"  onclick="makeSelection('IMAGE1','IMAGE2');" > 
+                        <div class="textOverRed" id="textOverId"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE1" src="static/imgs/hardcoded/image1.jpg" width="250PX" onmouseover="showTip('textOverId')"  onmouseout="hideTip('textOverId')"  > 
+                    </a>
+                   <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE2','IMAGE1');">
+                        <div class="textOverBlue" id="textOverId2"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE2"  src="static/imgs/hardcoded/image2.jpg" width="250PX" onmouseover="showTip('textOverId2')"  onmouseout="hideTip('textOverId2')" >
+                   </a>
+
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Date! HELP!!  
+                <div class="textALLUser" id="USER"> by Elle  </div>    </br>
+                 <div>
+    
+
+  
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+               </div> 
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                </div>  
+               </div> 
+              
+              </div>
+          </td> </tr>
+
+
+          <tr> <td>
+            <div class="imagesALL">                 
+   
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE3','IMAGE4');" >
+                        <div class="textOverRed" id="textOverId3"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE3" alt="N/A"  src="static/imgs/hardcoded/image3.jpg" width="250PX" onmouseover="showTip('textOverId3')"  onmouseout="hideTip('textOverId3')"> 
+                     </a>
+
+
+                    <a class="thumbnail" style="float:left;" onclick="makeSelection('IMAGE4','IMAGE3');">
+                        <div class="textOverBlue" id="textOverId4"><div class="textOverT"> vote!</div></div>
+                        <img id="IMAGE4" alt="N/A"  src="static/imgs/hardcoded/image4.jpg" width="250PX" onmouseover="showTip('textOverId4')"  onmouseout="hideTip('textOverId4')">
+                    </a>
+              </div>     
+
+              <div id="description">
+              <div id = "TITLE" class="textALLHead"> Night out (bar)  
+                <div class="textALLUser" id="USER"> by Joanna  </div>    
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Topshop dress</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-important" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+               </div> 
+
+                <div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">H&M accessories</span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">Fcuk Jeans </span> </div>
+                  <div class="category">  <span id="TAG" class="badge badge-info" style="font-size:15px; font-family:Helvetica">All Stars shoes </span> </div>
+                </div>  
+
+               </div> 
+              
+              </div>
+          </td> </tr>  
+	 	 
       </table>
      </div>
 </div>

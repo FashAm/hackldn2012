@@ -3,13 +3,13 @@
 # Author: Giorgos Eracleous #
 #############################
 
-from app.handlers import base,home,hello, user, post, mobile
+from app.handlers import base,home,hello, user, post, mobile, trends
 import tornado.web
 import os
 
 url_patterns = [
     ("/", home.HomePageHandler),
-    ("/hello", hello.HelloHandler),
+    ("/trending", trends.ViewTrendsHandler),
     ("/login/submit", user.UserLoginHandler),
     ("/mobile", post.PostRequestHandler),
     ("/mobile/feed", mobile.MobileFeedHandler),
