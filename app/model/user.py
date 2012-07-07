@@ -7,13 +7,13 @@ class User(Document):
     last_name = StringField(required=True)
     username = StringField(required=True)
     email = StringField(required=True, unique=True)
+    gender = StringField(required=True)
+    locale = StringField(required=True)
     friends = ListField(StringField(), default=list)
-
-    def add_user(self, first_name, last_name, username, email):
-    	self.first_name = first_name
-    	self.last_name = last_name
-    	self.email = email
-    	self.username = username
+    fb_id = StringField(required=True)
+    
+    def update_token(self, token):
+    	self.access_token = token
         self.save()
     
 class CachedUser(EmbeddedDocument):
