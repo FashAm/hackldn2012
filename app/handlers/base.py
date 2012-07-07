@@ -113,7 +113,7 @@ class BaseHandler(tornado.web.RequestHandler):
         Also set's a reference to a CachedUser object.
         '''
         self.cached_user = None
-        cookie = self.get_cookie("email")
+        cookie = self.get_secure_cookie("email")
         if cookie:
             try: 
                 user = User.objects(email=cookie).get()

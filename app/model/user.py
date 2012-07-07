@@ -15,3 +15,7 @@ class User(Document):
     	self.email = email
     	self.username = username
         self.save()
+    
+class CachedUser(EmbeddedDocument):
+    name = StringField(required=True)
+    id = ObjectIdField(required=True)
