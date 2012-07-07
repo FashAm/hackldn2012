@@ -46,6 +46,10 @@ class PostRequestHandler(base.BaseHandler):
             self.write('Your photo was successfully fashamified. Very soon other stylish Fashamers will give feedback.')
             
             #Notify the advisors
+            #Hacking
+            phone_no = phone_no[1:]
+            phone_no = "+44" + phone_no
+            
             self.notify(customer_name=post.aid, phone_no=phone_no)
         except Exception,e :
             print "Error"+str(e)

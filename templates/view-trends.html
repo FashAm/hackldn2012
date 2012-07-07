@@ -3,17 +3,21 @@
 {% block content %}
 <style type="text/css">
 
-body
-{
-background-image:url('static/imgs/hardcoded/back.png') ;
-background-repeat:no-repeat;
-background-color:#685184;
+#bg {
+top:0; 
+left:0; 
 
+/* Preserve aspet ratio */
+min-width:100%;
+min-height:100%;
 }
 </style>
 
+<body>
+<img src="static/imgs/hardcoded/back.png" id="bg" alt="">
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
 </br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+</body>
 
 
 {% end %}

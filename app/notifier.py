@@ -11,7 +11,7 @@ class Twilio(object):
 		#self.from_number = "forced error"
 
 	def send_sms(self,to_number,sms_text):
-		message = self.client.sms.messages.create(to='+447546119040', from_=self.from_number,body=sms_text)
+		message = self.client.sms.messages.create(to=to_number, from_=self.from_number,body=sms_text)
 
 
 
