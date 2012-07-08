@@ -62,5 +62,10 @@ class CreateCirclesHandler(base.BaseHandler):
     '''
     def on_get(self):
         self.base_render("create-circles.html")
+        
+class ViewCanvasHandler(base.BaseHandler):
+    def on_get(self):
+        self.base_render("canvas.html")
+    
 
         

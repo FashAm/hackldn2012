@@ -14,6 +14,7 @@ url_patterns = [
     #User handlers
     ("/circles/create", user.CreateCirclesHandler),
     ("/login/submit", user.UserLoginHandler),
+    ("/canvas/", user.ViewCanvasHandler),
     #Mobile handlers
     ("/mobile", post.PostRequestHandler),
     ("/mobile/feed", mobile.MobileFeedHandler),
