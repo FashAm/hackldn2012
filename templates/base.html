@@ -17,7 +17,7 @@
 	<meta property="og:site_name" content="Fash.am - Discover your style." />
 	<title>
 		{% block title %}
-			Fash.am
+			Fash.am - Get styling advice & explore trending styles 
 		{% end %}
 	</title>
 	<link href="{{static_url('css/bootstrap.css')}}" rel="stylesheet">
@@ -25,17 +25,27 @@
 	{% for css in kwargs['css_deps'] %}
 		<link rel="stylesheet" href="{{static_url(css)}}" type="text/css" />
 	{% end %}
+	
 </head> 
 
 <body>
+<div id="fb-root"></div>
 {% block header %}
+	<div id="header">   
+	  <a href="/login/submit" class="facebookLogin"><img src="../../static/imgs/home_imgs/fb1.png" onmouseover="this.src='../../static/imgs/home_imgs/fb2.png'" onmouseout="this.src='../../static/imgs/home_imgs/fb1.png'"  /> </a> 
+	  <span id="headerText">
+	   	<a href="/trending"><img src="../../static/imgs/home_imgs/button.png" style="margin:auto;display:block;"></a>	   
+	  </span>
+	  <div id="headerSep">
+	  </div> 
+	</div>  
 {% end %}
+
 {% block content %}
 {% end %}
 	{% raw xsrf_form_html() %}
 
 {% block scripts %}
-	
 	{% for js in kwargs['js_deps'] %}
 		<script src="{{static_url(js)}}"></script>
 	{% end %}

@@ -29,11 +29,15 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
                                 extra_params={"scope": "email"})
     
     def _on_login(self, user):
-        self.facebook_request("/me", access_token=user["access_token"], callback=self.async_callback(self._save_user_profile))
+        self.facebook_request("/me", access_token=user["access_token"], callback=self._save_user_profile)
         self.redirect("/")
         
     def _save_user_profile(self, user):
-
+        '''
+        This callback receives "user" which is the response from the API and contains the info for a user's profile.
+        '''
+        if not user:
+            raise tornado.web.HTTPError(500, "Facebook authentication failed.")
         try:
             User.objects(email=user['email']).get()
         except DoesNotExist, e:            
@@ -41,15 +45,22 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
             new_u.first_name = user['first_name']
             new_u.last_name = user['last_name']
             new_u.email = user['email'] 
+            self.set_secure_cookie("email", new_u.email)   
             new_u.username = user['username']
             new_u.gender = user['gender']
             new_u.locale = user['locale']
             new_u.fb_id = user['id']
-            new_u.save()
-            self.set_secure_cookie("email", new_u.email)
+            new_u.save()    
         else:
             #User exists
             pass
-     
+    
+class CreateCirclesHandler(base.BaseHandler):
+    '''                    
+    This handler allows the user to create circles to share their
+    photos with.
+    '''
+    def on_get(self):
+        self.base_render("create-circles.html")
 
         

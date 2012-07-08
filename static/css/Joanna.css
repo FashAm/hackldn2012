@@ -15,6 +15,12 @@ a.explore {background-image: url('/static/imgs/home_imgs/btnE.png');}
 html { padding: 0px; margin: 0px;}
 body {padding: 0px; margin: 0px; background-image: url('imgs/back.png');}
 
+.hero-unit {
+	margin-left: auto ;
+	margin-right: auto ;
+	width: 800px;	
+}
+
 #description {float: left; height: 100%; width: 28%; }
 #imageSel1, #imageSel2 { visibility: hidden;}
 
