@@ -37,6 +37,49 @@ div.friend-name-container{
 	top:0px;
 	padding-top:5px;
 	left:90px;
-	font-family: Champagne;
-	font-size: 20px;
 }
+
+div.friend-name-container p{
+	font-size: 20px;
+	font-family: Champagne;
+	margin:0;
+}
+
+div.create-circle-container {
+	position:relative;
+	float:left;
+	height: 170px;
+	width: 170px;
+	-moz-border-radius: 85px;
+	border-radius: 85px;
+	border-style:dashed;
+	border-color:black;
+	background-color:white;
+}
+
+div.circle-container {
+	position:relative;
+	float:left;
+	height: 170px;
+	width: 170px;
+	margin:5px;
+	-moz-border-radius: 85px;
+	border-radius: 85px;
+	border-style:solid;
+	border-color:black;
+	background-color:white;	
+	text-align: center;
+}
+
+div.create-circle-container:hover{
+	border-style:solid;
+}
+
+div.circle-info-container{
+	position:absolute; 
+	top:50%; 
+	height:240px; 
+	margin-top:-120px;
+	font-weight:bold;
+}
+

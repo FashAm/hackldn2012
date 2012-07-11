@@ -75,7 +75,8 @@ class CreateCirclesHandler(base.BaseHandler):
         uf1.last_name = "Makkoulis"
         uf1.profile_pic = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/368824_512355977_993007794_n.jpg" 
         friends = [uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1] 
-        self.base_render("create-circles.html", friends=friends)
+        circles = ["Family", "Friends", "Experts", "Boyfriend", "School"]
+        self.base_render("create-circles.html", friends=friends, circles=circles)
         
     def _save_user_friends(self, response):
         '''
