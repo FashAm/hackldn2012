@@ -5,9 +5,10 @@
 # CSS Dependencies.
 css_deps = ("css", "css",
             [
-              ("/", ["Joanna.css"]),
-              ("/circles*", ["Joanna.css"]),  
+              ("/circles/*", ["joanna.css", "circles.css"]),  
               ("/trending", ["trending.css"]),
+              ("/", ["joanna.css"])
+
             ])
 
 # JS Dependencies.

@@ -1,6 +1,6 @@
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
-from app.model.user import User 
+from app.model.user import User, UserFriend 
 import tornado.auth, tornado.web
 from tornado import httpclient
 
@@ -65,7 +65,26 @@ class CreateCirclesHandler(base.BaseHandler):
     photos with.
     '''
     def on_get(self):
-        self.base_render("create-circles.html")
+        #self.facebook_request("/me", access_token=user["access_token"], callback=self._save_user_friends)
+        uf = UserFriend()
+        uf.first_name = "Alexis"
+        uf.last_name = "Loizou"
+        uf.profile_pic = "http://profile.ak.fbcdn.net/hprofile-ak-snc4/211465_812740366_4006250_n.jpg" 
+        uf1 = UserFriend()
+        uf1.first_name = "Giorgos"
+        uf1.last_name = "Makkoulis"
+        uf1.profile_pic = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/368824_512355977_993007794_n.jpg" 
+        friends = [uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1] 
+        self.base_render("create-circles.html", friends=friends)
+        
+    def _save_user_friends(self, response):
+        '''
+        This callback receives "user" which is the response from the API and contains the info for a user's profile.
+        '''
+        if not user:
+            raise tornado.web.HTTPError(500, "Facebook authentication failed.")
+        
+        
         
 class ViewCanvasHandler(base.BaseHandler):
     def on_get(self):

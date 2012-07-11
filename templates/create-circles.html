@@ -7,6 +7,20 @@
 	  <h1>Yay! Welcome to fash.am.</h1>
 	  <br>
 	  <p>Now that you are registered you can invite your friends to be your own personal stylists.</p>
+
+	  <div class="friends-list-container">
+	  {% for friend in kwargs['friends'] %}
+		<div class="friend-info-container">
+			<div class="friend-img">
+				<img style="width: 80px; height:60px;" src="{{friend.profile_pic}}">
+			</div>
+			<div class="friend-name-container">
+			{{friend.first_name}}<br>
+			{{friend.last_name}}
+			</div>		
+		</div>
+	  {% end %}
+	  </div> 
 	  <p>
 	    <a title="Invite your friends to be your stylists!" onclick="sendRequestViaMultiFriendSelector(); return false;" class="btn btn-primary btn-large">Invite friends</a>
    	    <a title="Nah! I'll invite them later." href="/" class="btn btn btn-large">Skip</a>

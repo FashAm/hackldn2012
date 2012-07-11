@@ -1,6 +1,13 @@
 from mongoengine import Document, ObjectIdField, EmailField, StringField, DateTimeField, IntField, EmbeddedDocument, EmbeddedDocumentField, ListField
 import datetime
 # ============================ User ================================ #
+
+class UserFriend(EmbeddedDocument):
+    fb_id = StringField(required=True)
+    profile_pic = StringField()
+    first_name = StringField(required=True)
+    last_name = StringField(required=True)
+
 class User(Document):
     meta = {"collection":"Users"}
     first_name = StringField(required=True)
@@ -9,7 +16,7 @@ class User(Document):
     email = StringField(required=True, unique=True)
     gender = StringField(required=True)
     locale = StringField(required=True)
-    friends = ListField(StringField(), default=list)
+    friends = ListField(EmbeddedDocumentField(UserFriend), default=list)
     fb_id = StringField(required=True)
     
     def update_token(self, token):
