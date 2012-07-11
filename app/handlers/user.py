@@ -24,6 +24,10 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
               callback=self.async_callback(                                                                                                 
                 self._on_login))
             return
+        elif self.get_secure_cookie('email'):
+            self.redirect('/circles/create')
+            return
+        
         self.authorize_redirect(redirect_uri='http://localhost:8888/login/submit',
                                 client_id=self.settings["facebook_api_key"],
                                 extra_params={"scope": "email"})
