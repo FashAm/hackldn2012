@@ -8,7 +8,7 @@ import os
 from fabric.api import *
 from fabric.colors import green
 
-APP_NAME = "noteslib"
+APP_NAME = "fasham"
 
 ####################
 # PROCESS COMMANDS #
