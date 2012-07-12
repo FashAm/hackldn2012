@@ -29,7 +29,7 @@ div.friend-info-container{
 	cursor: pointer;
 }
 
-div.friend-info-container-dragged { 
+div.friend-info-container-dragged, div.friend-info-container-dropped { 
 	opacity: 0.4; 
 }
 
@@ -79,9 +79,14 @@ div.circle-container {
 	text-align: center;
 }
 
+div.circle-container-droppable { 
+	border-color:red;
+}
+
 div.create-circle-container:hover{
 	border-style:solid;
 }
+
 
 div.circle-info-container{
 	position:absolute; 

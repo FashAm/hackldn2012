@@ -6,6 +6,7 @@
 
 // =============================== Drag and drop functions =============================== //
 
+  //Draggable functions
   $('div.friend-info-container').draggable( {
     revert: "invalid",
     helper: draggableHelper,
@@ -22,7 +23,27 @@
 
   function stopEventHandler(event, ui){
      $(this).removeClass("friend-info-container-dragged");
-     $(this).removeClass("friend-info-container");
+     $(this).addClass("friend-info-container");
   }
-    
+   
+  //Droppable functions
+  $('div.circle-container').droppable( {
+    	drop: handleDropEvent,
+	over: handleOverEvent,
+	out:  handleOutEvent,
+  } );
 
+  function handleDropEvent( event, ui ) {
+     var draggable = ui.draggable;
+     ui.draggable.addClass("friend-info-container-dropped");
+     $(this).removeClass()	
+  }
+
+  function handleOverEvent( event, ui ) {
+     $(this).addClass("circle-container-droppable");
+  }
+
+  function handleOutEvent( event, ui ) {
+     $(this).removeClass("circle-container-droppable");
+     $(this).addClass("circle-container");
+  }
