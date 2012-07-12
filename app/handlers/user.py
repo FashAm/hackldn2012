@@ -3,6 +3,7 @@ from mongoengine.queryset import DoesNotExist
 from app.model.user import User, UserFriend 
 import tornado.auth, tornado.web
 from tornado import httpclient
+import functools
 
 class UserLoginOptionsHandler(base.BaseHandler):
     def on_get(self):
@@ -33,31 +34,32 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
                                 extra_params={"scope": "email"})
     
     def _on_login(self, user):
-        self.facebook_request("/me", access_token=user["access_token"], callback=self._save_user_profile)
-        self.redirect("/")
+        try:
+            c_user = User.objects(access_token=user['access_token']).get()
+        except DoesNotExist, e:   
+            c_user = User()
+            c_user.access_token = user["access_token"]        
+            cb = functools.partial(self._save_user_profile, c_user)
+            self.facebook_request("/me", access_token=c_user.access_token, callback=cb)
         
-    def _save_user_profile(self, user):
+        self.set_secure_cookie("access_token", c_user.access_token)
+        self.redirect("/")   
+    
+    def _save_user_profile(self, c_user, response):
         '''
         This callback receives "user" which is the response from the API and contains the info for a user's profile.
         '''
-        if not user:
+        if not response:
             raise tornado.web.HTTPError(500, "Facebook authentication failed.")
-        try:
-            User.objects(email=user['email']).get()
-        except DoesNotExist, e:            
-            new_u = User()
-            new_u.first_name = user['first_name']
-            new_u.last_name = user['last_name']
-            new_u.email = user['email'] 
-            self.set_secure_cookie("email", new_u.email)   
-            new_u.username = user['username']
-            new_u.gender = user['gender']
-            new_u.locale = user['locale']
-            new_u.fb_id = user['id']
-            new_u.save()    
-        else:
-            #User exists
-            pass
+
+        c_user.first_name = response['first_name']
+        c_user.last_name = response['last_name']
+        c_user.email = response['email'] 
+        c_user.username = response['username']
+        c_user.gender = response['gender']
+        c_user.locale = response['locale']
+        c_user.fb_id = response['id']
+        c_user.save()    
     
 class CreateCirclesHandler(base.BaseHandler):
     '''                    

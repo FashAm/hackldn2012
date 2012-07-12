@@ -18,6 +18,7 @@ class User(Document):
     locale = StringField(required=True)
     friends = ListField(EmbeddedDocumentField(UserFriend), default=list)
     fb_id = StringField(required=True)
+    access_token = StringField(required=True)
     
     def update_token(self, token):
     	self.access_token = token
