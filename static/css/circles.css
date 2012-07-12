@@ -1,6 +1,6 @@
 img.friend-img {
-	width: 80px; 
-	height:60px;
+	width: 50px; 
+	height:50px;
 }
 
 div.friends-list-container{
@@ -44,7 +44,7 @@ div.friend-name-container{
 	width:100px;
 	top:0px;
 	padding-top:5px;
-	left:90px;
+	left:58px;
 }
 
 div.friend-name-container p{

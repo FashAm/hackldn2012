@@ -41,7 +41,10 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
             c_user.access_token = user["access_token"]        
             cb = functools.partial(self._save_user_profile, c_user)
             self.facebook_request("/me", access_token=c_user.access_token, callback=cb)
-        
+            
+            cb = functools.partial(self._save_user_friends, c_user)
+            self.facebook_request("/me/friends", access_token=c_user.access_token, callback=cb, fields='first_name,last_name,id,picture')
+            
         self.set_secure_cookie("access_token", c_user.access_token)
         self.redirect("/")   
     
@@ -60,36 +63,31 @@ class UserLoginHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
         c_user.locale = response['locale']
         c_user.fb_id = response['id']
         c_user.save()    
+
+    def _save_user_friends(self, c_user, response):
+        '''
+        This callback receives the response from the API that contains user's friends.
+        '''
+        if not c_user:
+            raise tornado.web.HTTPError(500, "Facebook authentication failed.")
+        friends = response['data']
+        for friend in friends:
+            uf = UserFriend()
+            uf.first_name = friend['first_name']
+            uf.last_name = friend['last_name']
+            uf.profile_pic = friend['picture']
+            uf.fb_id = friend['id']
+            c_user.friends.append(uf)
+        c_user.save()
     
-class CreateCirclesHandler(base.BaseHandler):
+class CreateCirclesHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
     '''                    
     This handler allows the user to create circles to share their
     photos with.
     '''
     def on_get(self):
-        #self.facebook_request("/me", access_token=user["access_token"], callback=self._save_user_friends)
-        uf = UserFriend()
-        uf.first_name = "Alexis"
-        uf.last_name = "Loizou"
-        uf.profile_pic = "http://profile.ak.fbcdn.net/hprofile-ak-snc4/211465_812740366_4006250_n.jpg" 
-        uf.fb_id = "1"
-        uf1 = UserFriend()
-        uf1.first_name = "Giorgos"
-        uf1.last_name = "Makkoulis"
-        uf1.profile_pic = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/368824_512355977_993007794_n.jpg" 
-        uf1.fb_id = "2"
-        friends = [uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1] 
         circles = ["Family", "Friends", "Experts", "Boyfriend", "School"]
-        self.base_render("create-circles.html", friends=friends, circles=circles)
-        
-    def _save_user_friends(self, response):
-        '''
-        This callback receives "user" which is the response from the API and contains the info for a user's profile.
-        '''
-        if not user:
-            raise tornado.web.HTTPError(500, "Facebook authentication failed.")
-        
-        
+        self.base_render("create-circles.html", friends=self.current_user.friends, circles=circles)
         
 class ViewCanvasHandler(base.BaseHandler):
     def on_get(self):
