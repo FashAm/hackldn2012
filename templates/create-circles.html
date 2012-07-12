@@ -4,7 +4,7 @@
 <div id="main">  
 </br></br></br></br>
 	<div class="hero-unit">
-	  <h1>Yay! Welcome to fash.am.</h1>
+	  <h1>Yay! Welcome to fash.am {{current_user.first_name}}.</h1>
 	  <br>
 	  <p>Drag and drop </a> your friends to your circles and let them be your own personal stylists.</p>
 	  <div class="friends-list-container">
@@ -27,10 +27,10 @@
 	
 		<div class="user-circles-container">
 		<div id="create-circle" class="create-circle-container">
-		</div>
+		</div>                  
 		{% for circle in kwargs['circles']%}
-			<div class="circle-container">
-				<p>{{circle}}</p>
+			<div cid='{{circle.name}}' class="circle-container">
+				<p>{{circle.name}}</p>
 			</div>
 		{% end %}
 		</div>

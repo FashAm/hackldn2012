@@ -38,6 +38,7 @@
      ui.draggable.addClass("friend-info-container-dropped");
      $(this).removeClass("circle-container-droppable");
      $(this).addClass("circle-container");
+     sendRequestToRecipients(ui.draggable.attr("fid"));
   }
 
   function handleOverEvent( event, ui ) {

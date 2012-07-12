@@ -14,7 +14,7 @@ css_deps = ("css", "css",
 # JS Dependencies.
 js_deps = ("js", "js",
             [
-             ("/circles/*", ["circles.js", "bootstrap-tooltip.js"]),
+             ("/circles/*", ["circles.js", "fb.js", "bootstrap-tooltip.js"]),
              ("/", ["joanna.js", "fb.js"]),	
 	    ])
 

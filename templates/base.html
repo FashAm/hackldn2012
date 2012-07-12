@@ -48,8 +48,8 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-twipsy.js"></script>
-<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-popover.js"></script>
+<script src="{{static_url('js/libs/blurb.min.js')}}"></script>
+<script src="{{static_url('js/FASH.js')}}"></script>
 {% block scripts %}
 	{% for js in kwargs['js_deps'] %}
 		<script src="{{static_url(js)}}"></script>

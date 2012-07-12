@@ -35,7 +35,7 @@ function requestCallback(response) {
 
 function sendRequestToRecipients(fid) {
   FB.ui({method: 'apprequests',
-    message: 'Hey! Join me on fash.am.',
+    message: 'A friend of yours invited you to be their personal stylists on Fash.am.',
     to: fid
   }, requestCallback);
 }

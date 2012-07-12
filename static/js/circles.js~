@@ -36,7 +36,9 @@
   function handleDropEvent( event, ui ) {
      var draggable = ui.draggable;
      ui.draggable.addClass("friend-info-container-dropped");
-     $(this).removeClass()	
+     $(this).removeClass("circle-container-droppable");
+     $(this).addClass("circle-container");
+     sendRequestToRecipients(ui.draggable.attr("fid"));
   }
 
   function handleOverEvent( event, ui ) {

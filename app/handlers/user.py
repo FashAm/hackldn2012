@@ -1,6 +1,6 @@
 from app.handlers import base
 from mongoengine.queryset import DoesNotExist
-from app.model.user import User, UserFriend 
+from app.model.user import User, UserCircle 
 import tornado.auth, tornado.web
 from tornado import httpclient
 import functools
@@ -86,8 +86,14 @@ class CreateCirclesHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
     photos with.
     '''
     def on_get(self):
-        circles = ["Family", "Friends", "Experts", "Boyfriend", "School"]
-        self.base_render("create-circles.html", friends=self.current_user.friends, circles=circles)
+        uc = UserCircle()
+        uc.name = "Family"
+        uc1 = UserCircle()
+        uc1.name = "Friends"
+        uc2 = UserCircle()
+        uc2.name = "Experts"
+        self.base_render("create-circles.html", friends=self.current_user.friends, circles=self.current_user.circles)
+        
         
 class ViewCanvasHandler(base.BaseHandler):
     def on_get(self):

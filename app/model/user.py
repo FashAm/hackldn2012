@@ -8,6 +8,10 @@ class UserFriend(EmbeddedDocument):
     first_name = StringField(required=True)
     last_name = StringField(required=True)
 
+class UserCircle(EmbeddedDocument):
+    name = StringField(required=True, unique=True)
+    members = ListField(EmbeddedDocumentField(UserFriend), default=list)
+
 class User(Document):
     meta = {"collection":"Users"}
     first_name = StringField(required=True)
@@ -19,6 +23,7 @@ class User(Document):
     friends = ListField(EmbeddedDocumentField(UserFriend), default=list)
     fb_id = StringField(required=True)
     access_token = StringField(required=True)
+    circles = ListField(EmbeddedDocumentField(UserCircle), default=list)
     
     def update_token(self, token):
     	self.access_token = token
