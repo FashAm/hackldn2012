@@ -1,3 +1,7 @@
+img.friend-img {
+	width: 80px; 
+	height:60px;
+}
 
 div.friends-list-container{
 	position:relative;
@@ -23,6 +27,10 @@ div.friend-info-container{
 .friend-info-container:hover {
 	background-color:grey;
 	cursor: pointer;
+}
+
+div.friend-info-container-dragged { 
+	opacity: 0.4; 
 }
 
 div.friend-img-container{

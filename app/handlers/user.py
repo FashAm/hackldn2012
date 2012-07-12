@@ -70,10 +70,12 @@ class CreateCirclesHandler(base.BaseHandler):
         uf.first_name = "Alexis"
         uf.last_name = "Loizou"
         uf.profile_pic = "http://profile.ak.fbcdn.net/hprofile-ak-snc4/211465_812740366_4006250_n.jpg" 
+        uf.fb_id = "1"
         uf1 = UserFriend()
         uf1.first_name = "Giorgos"
         uf1.last_name = "Makkoulis"
         uf1.profile_pic = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/368824_512355977_993007794_n.jpg" 
+        uf1.fb_id = "2"
         friends = [uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1, uf, uf1] 
         circles = ["Family", "Friends", "Experts", "Boyfriend", "School"]
         self.base_render("create-circles.html", friends=friends, circles=circles)

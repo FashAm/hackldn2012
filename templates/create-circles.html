@@ -9,9 +9,9 @@
 	  <p>Drag and drop </a> your friends to your circles and let them be your own personal stylists.</p>
 	  <div class="friends-list-container">
 		{% for friend in kwargs['friends'] %}
-		<div class="friend-info-container">
+		<div fid={{friend.fb_id}} class="friend-info-container">
 			<div class="friend-img">
-				<img style="width: 80px; height:60px;" src="{{friend.profile_pic}}">
+				<img class="friend-img" src="{{friend.profile_pic}}">
 			</div>
 			<div class="friend-name-container">
 				<p>{{friend.first_name}}</p>
