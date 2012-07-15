@@ -52,10 +52,15 @@
 // =============================== Create new circle functions =============================== //
 
   $("div.create-circle-container").click(function() {
-  	$("div.user-circles-container").append("<div class='circle-container'><p>New circle</p></div>");
+  	$("div.user-circles-container").append("<div class='circle-container'><div class='circle-info'><input type='text' class='input-small' placeholder='Give me a name.'></div></div>");
 	$('div.circle-container').droppable( {
 	    drop: handleDropEvent,
 	    over: handleOverEvent,
 	    out:  handleOutEvent,
 	} );
   });
+
+  $('input.input-small').live('focus', function() {
+      $(this).parent().append("<button class='btn btn-primary btn-mini'>Save changes</button>");	
+  });
+  
