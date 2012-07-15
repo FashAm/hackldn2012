@@ -27,7 +27,10 @@
 	
 		<div class="user-circles-container">
 		<div id="create-circle" class="create-circle-container">
-		</div>                  
+			<p>Click me</p>
+			<p>to create a new</p>
+			<p>circle</p>
+		</div>         
 		{% for circle in kwargs['circles']%}
 			<div cid='{{circle.name}}' class="circle-container">
 				<p>{{circle.name}}</p>

@@ -86,12 +86,16 @@ class CreateCirclesHandler(base.BaseHandler, tornado.auth.FacebookGraphMixin):
     photos with.
     '''
     def on_get(self):
-        uc = UserCircle()
-        uc.name = "Family"
-        uc1 = UserCircle()
-        uc1.name = "Friends"
-        uc2 = UserCircle()
-        uc2.name = "Experts"
+        #=======================================================================
+        # uc = UserCircle()
+        # uc.name = "Family"
+        # uc1 = UserCircle()
+        # uc1.name = "Friends"
+        # uc2 = UserCircle()
+        # uc2.name = "Experts"
+        # self.current_user.circles.append(uc1)
+        # self.current_user.save()
+        #=======================================================================
         self.base_render("create-circles.html", friends=self.current_user.friends, circles=self.current_user.circles)
         
         

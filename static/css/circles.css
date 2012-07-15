@@ -63,6 +63,7 @@ div.create-circle-container {
 	border-style:dashed;
 	border-color:black;
 	background-color:white;
+	text-align: center;
 }
 
 div.circle-container {
@@ -77,6 +78,10 @@ div.circle-container {
 	border-color:black;
 	background-color:white;	
 	text-align: center;
+}
+
+div.circle-container input{
+	width:80%;
 }
 
 div.circle-container-droppable { 
